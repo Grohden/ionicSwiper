@@ -1,3 +1,5 @@
+import {directiveName as containerName} from './swiper.container.directive';
+
 SwiperRequireFocusDirective.$inject = ['$timeout'];
 
 /**
@@ -11,7 +13,7 @@ export function SwiperRequireFocusDirective($timeout) {
     return {
         restrict: 'A',
         priority:550,
-        require:'^^swiperContainer',
+        require:`^^${containerName}`,
         link: function ($scope, $element, $attr, $ctrl) {
             $timeout(() => $ctrl.slideToElement($element[0]));
         }

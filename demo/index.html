@@ -1,12 +1,12 @@
-<html>
+<html ng-app="ionicApp">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Ionic List Directive</title>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.3/css/swiper.css"/>
-        <link rel="stylesheet" href="https://code.ionicframework.com/nightly/css/ionic.css"/>
-        <link rel="stylesheet" href="demo.css"/>
+        <link type="text/css" rel="stylesheet prefetch" href="https://code.ionicframework.com/nightly/css/ionic.min.css">
+        <link type="text/css" rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.3/css/swiper.css"/>
+        <link type="text/css" rel="stylesheet prefetch" href="demo.css"/>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
         <script type="text/javascript" src="https://code.ionicframework.com/nightly/js/ionic.bundle.min.js"></script>
@@ -14,7 +14,7 @@
         <script type="text/javascript" src="./demo.bundle.js"></script>
     </head>
 
-    <body ng-app="AppModule" ng-controller="AppController as ctrl">
+    <body ng-controller="AppController as ctrl">
 
         <ion-header-bar class="bar-positive">
             <h1 class="title">Ionic V1 list with both side swipes</h1>
@@ -32,7 +32,9 @@
             <ion-list>
                 <div class="swiper-container" swiper-container="true" ng-repeat="item in ctrl.items">
                     <div class="swiper-wrapper">
-                        <ion-item class="central-item" swiper-slide="center" swiper-require-focus>
+                        <ion-item class="central-item"
+                                  swiper-slide="center"
+                                  on-hold="ctrl.handleHold(item)">
                             Item {{:: item.id }}
                         </ion-item>
                         <ion-item class="side-item" swiper-slide="right">
@@ -45,7 +47,6 @@
                 </div>
 
             </ion-list>
-
         </ion-content>
 </body>
 </html>

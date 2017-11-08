@@ -7,12 +7,12 @@ export const directiveName = 'swiperSlide';
 
 /**
  * @ngdoc directive
- * @name swiper.angular#SwiperItemDirective
+ * @name swiper.angular#SwiperSlideDirective
  * @description
  * Diretiva que cria itens na instancia do controler pai do swiped
  *
  */
-export function SwiperItemDirective() {
+export function SwiperSlideDirective() {
     'ngInject';
 
     return {
@@ -20,17 +20,19 @@ export function SwiperItemDirective() {
         require:`^^${containerName}`,
         link: function ($scope, $element, $attr, $ctrl) {
             const swiperItem = $attr[directiveName];
+            const add = $ctrl.addSlide($element);
+
             $element.addClass('swiper-slide');
-            
-            if(swiperItem !== 'center' && !$ctrl.isSwiper){
+            if(swiperItem !== 'center' && !$ctrl.willUseSwiper){
                 $element.addClass('ng-hide');
             }
 
+
             ifElse(
                 equals('left'),
-                () => $ctrl.prependToSwiper,
-                () => $ctrl.appendToSwiper
-            )(swiperItem)($element);
+                add.toLeft,
+                add.toRight
+            )(swiperItem);
         }
     };
 }

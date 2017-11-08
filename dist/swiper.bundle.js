@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -213,7 +213,7 @@ module.exports = _isPlaceholder;
 
 var _curry2 = /*#__PURE__*/__webpack_require__(0);
 
-var _equals = /*#__PURE__*/__webpack_require__(17);
+var _equals = /*#__PURE__*/__webpack_require__(24);
 
 /**
  * Returns `true` if its arguments are equivalent, `false` otherwise. Handles
@@ -248,6 +248,18 @@ module.exports = equals;
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _has(prop, obj) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+module.exports = _has;
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -307,18 +319,6 @@ function _arity(n, fn) {
 module.exports = _arity;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _has(prop, obj) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-module.exports = _has;
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -354,7 +354,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.directiveName = undefined;
 exports.SwiperContainerDirective = SwiperContainerDirective;
 
-var _swiperContainer = __webpack_require__(9);
+var _swiperContainer = __webpack_require__(15);
 
 SwiperContainerDirective.$inject = ['$timeout'];
 
@@ -363,7 +363,7 @@ SwiperContainerDirective.$inject = ['$timeout'];
  * @ngdoc directive
  * @name swiper.angular#SwiperContainerDirective
  * @description
- * Diretiva wrapper da lib swiped
+ * Wrapper directive for swiper
  *
  */
 function SwiperContainerDirective($timeout) {
@@ -394,125 +394,11 @@ var directiveName = exports.directiveName = 'swiperContainer';
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.SwiperContainerController = SwiperContainerController;
-SwiperContainerController.$inject = ['$element', '$scope', '$attrs', 'SwiperService'];
-
-var unless = __webpack_require__(10);
-var equals = __webpack_require__(4);
-var findIndex = __webpack_require__(11);
-
-/**
- * @ngdoc controller
- * @name swiper.angular:SwiperContainerController
- * @alias tskCtrl
- *
- * @description
- * Controler de um container do swiper
- *
- * @require $element
- *
- **/
-
-function SwiperContainerController($element, $scope, $attrs, SwiperService) {
-    'ngInject';
-
-    var _self = this;
-    var serviceRegister = SwiperService.instanceForId($scope.$id);
-    var swiperInstance = new Swiper($element, SwiperService.getSwiperDefaultConfig());
-
-    _self.isSwiper = $scope.$eval($attrs.swiperContainer);
-    _self.appendToSwiper = function (slideElement) {
-        swiperInstance.appendSlide(slideElement);
-        return _self;
-    };
-
-    _self.callUpdate = function () {
-        swiperInstance.update();
-        return _self;
-    };
-
-    _self.prependToSwiper = function (slideElement) {
-        swiperInstance.prependSlide(slideElement);
-        return _self;
-    };
-
-    _self.getSlidesLength = function () {
-        return swiperInstance.slides.length;
-    };
-
-    _self.slideToElement = function ($element) {
-        var index = findIndex(
-        //Se é o mesmo PONTEIRO
-        function (e) {
-            return e === $element;
-        })(swiperInstance.slides);
-
-        unless(equals(-1), swiperInstance.slideTo(index));
-        return _self;
-    };
-
-    (function init() {
-        serviceRegister.register(swiperInstance);
-        $scope.$on('$destroy', serviceRegister.remove);
-    })();
-}
-
-var controllerName = exports.controllerName = 'SwiperContainerController';
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _curry3 = /*#__PURE__*/__webpack_require__(2);
-
-/**
- * Tests the final argument by passing it to the given predicate function. If
- * the predicate is not satisfied, the function will return the result of
- * calling the `whenFalseFn` function with the same argument. If the predicate
- * is satisfied, the argument is returned as is.
- *
- * @func
- * @memberOf R
- * @since v0.18.0
- * @category Logic
- * @sig (a -> Boolean) -> (a -> a) -> a -> a
- * @param {Function} pred        A predicate function
- * @param {Function} whenFalseFn A function to invoke when the `pred` evaluates
- *                               to a falsy value.
- * @param {*}        x           An object to test with the `pred` function and
- *                               pass to `whenFalseFn` if necessary.
- * @return {*} Either `x` or the result of applying `x` to `whenFalseFn`.
- * @see R.ifElse, R.when
- * @example
- *
- *      let safeInc = R.unless(R.isNil, R.inc);
- *      safeInc(null); //=> null
- *      safeInc(1); //=> 2
- */
-
-var unless = /*#__PURE__*/_curry3(function unless(pred, whenFalseFn, x) {
-  return pred(x) ? x : whenFalseFn(x);
-});
-module.exports = unless;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var _curry2 = /*#__PURE__*/__webpack_require__(0);
 
-var _dispatchable = /*#__PURE__*/__webpack_require__(12);
+var _dispatchable = /*#__PURE__*/__webpack_require__(10);
 
-var _xfindIndex = /*#__PURE__*/__webpack_require__(26);
+var _xfindIndex = /*#__PURE__*/__webpack_require__(20);
 
 /**
  * Returns the index of the first element of the list which matches the
@@ -551,7 +437,7 @@ var findIndex = /*#__PURE__*/_curry2( /*#__PURE__*/_dispatchable([], _xfindIndex
 module.exports = findIndex;
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -559,7 +445,7 @@ module.exports = findIndex;
 
 var _isArray = /*#__PURE__*/__webpack_require__(7);
 
-var _isTransformer = /*#__PURE__*/__webpack_require__(25);
+var _isTransformer = /*#__PURE__*/__webpack_require__(19);
 
 /**
  * Returns a function that dispatches with different strategies based on the
@@ -602,7 +488,7 @@ function _dispatchable(methodNames, xf, fn) {
 module.exports = _dispatchable;
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -617,7 +503,7 @@ function _reduced(x) {
 module.exports = _reduced;
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -633,7 +519,46 @@ module.exports = {
 };
 
 /***/ }),
-/* 15 */
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _curry3 = /*#__PURE__*/__webpack_require__(2);
+
+/**
+ * Tests the final argument by passing it to the given predicate function. If
+ * the predicate is not satisfied, the function will return the result of
+ * calling the `whenFalseFn` function with the same argument. If the predicate
+ * is satisfied, the argument is returned as is.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.18.0
+ * @category Logic
+ * @sig (a -> Boolean) -> (a -> a) -> a -> a
+ * @param {Function} pred        A predicate function
+ * @param {Function} whenFalseFn A function to invoke when the `pred` evaluates
+ *                               to a falsy value.
+ * @param {*}        x           An object to test with the `pred` function and
+ *                               pass to `whenFalseFn` if necessary.
+ * @return {*} Either `x` or the result of applying `x` to `whenFalseFn`.
+ * @see R.ifElse, R.when
+ * @example
+ *
+ *      let safeInc = R.unless(R.isNil, R.inc);
+ *      safeInc(null); //=> null
+ *      safeInc(1); //=> 2
+ */
+
+var unless = /*#__PURE__*/_curry3(function unless(pred, whenFalseFn, x) {
+  return pred(x) ? x : whenFalseFn(x);
+});
+module.exports = unless;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -665,7 +590,125 @@ function _checkForMethod(methodname, fn) {
 module.exports = _checkForMethod;
 
 /***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.SwiperContainerController = SwiperContainerController;
+SwiperContainerController.$inject = ['$element', '$scope', '$attrs', 'SwiperService'];
+var unless = __webpack_require__(13);
+var equals = __webpack_require__(4);
+var findIndex = __webpack_require__(9);
+var eqPointer = function eqPointer(f) {
+    return function (s) {
+        return f === s;
+    };
+};
+
+/**
+ * @ngdoc controller
+ * @name swiper.angular:SwiperContainerController
+ * @alias tskCtrl
+ *
+ * @description
+ * Swiper container controller that exposes some functions
+ *
+ * @require $element
+ *
+ **/
+function SwiperContainerController($element, $scope, $attrs, SwiperService) {
+    'ngInject';
+
+    var _self = this;
+    var swiperInstance = SwiperService.createInstance($scope.id, $element);
+
+    _self.willUseSwiper = $scope.$eval($attrs.swiperContainer);
+
+    _self.addSlide = function (slideElement) {
+        return {
+            toLeft: function toLeft() {
+                return swiperInstance.prependSlide(slideElement);
+            },
+            toRight: function toRight() {
+                return swiperInstance.appendSlide(slideElement);
+            }
+        };
+    };
+
+    _self.callUpdate = function () {
+        swiperInstance.update();
+        return _self;
+    };
+
+    _self.getSlidesLength = function () {
+        return swiperInstance.slides.length;
+    };
+
+    _self.slideToElement = function ($element) {
+        var index = findIndex(eqPointer($element))(swiperInstance.slides);
+
+        unless(equals(-1), swiperInstance.slideTo(index));
+        return _self;
+    };
+
+    (function init() {
+        $scope.$on('$destroy', swiperInstance.destroy);
+    })();
+}
+
+var controllerName = exports.controllerName = 'SwiperContainerController';
+
+/***/ }),
 /* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _curry3 = /*#__PURE__*/__webpack_require__(2);
+
+var curryN = /*#__PURE__*/__webpack_require__(47);
+
+/**
+ * Creates a function that will process either the `onTrue` or the `onFalse`
+ * function depending upon the result of the `condition` predicate.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.8.0
+ * @category Logic
+ * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)
+ * @param {Function} condition A predicate function
+ * @param {Function} onTrue A function to invoke when the `condition` evaluates to a truthy value.
+ * @param {Function} onFalse A function to invoke when the `condition` evaluates to a falsy value.
+ * @return {Function} A new unary function that will process either the `onTrue` or the `onFalse`
+ *                    function depending upon the result of the `condition` predicate.
+ * @see R.unless, R.when
+ * @example
+ *
+ *      var incCount = R.ifElse(
+ *        R.has('count'),
+ *        R.over(R.lensProp('count'), R.inc),
+ *        R.assoc('count', 1)
+ *      );
+ *      incCount({});           //=> { count: 1 }
+ *      incCount({ count: 1 }); //=> { count: 2 }
+ */
+
+var ifElse = /*#__PURE__*/_curry3(function ifElse(condition, onTrue, onFalse) {
+  return curryN(Math.max(condition.length, onTrue.length, onFalse.length), function _ifElse() {
+    return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
+  });
+});
+module.exports = ifElse;
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -676,24 +719,310 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.moduleName = undefined;
 
+var _swiper = __webpack_require__(18);
+
 var _swiperContainer = __webpack_require__(8);
 
-var _swiperContainer2 = __webpack_require__(9);
+var _swiperSlide = __webpack_require__(46);
 
-var _swiperSlide = __webpack_require__(27);
+var _swiperRequireFocus = __webpack_require__(49);
 
-var _swiperRequireFocus = __webpack_require__(31);
+var _swiperContainer2 = __webpack_require__(15);
 
-var _swiper = __webpack_require__(32);
+var _swiperMin = __webpack_require__(50);
 
-__webpack_require__(47);
+var _swiperMin2 = _interopRequireDefault(_swiperMin);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var moduleName = exports.moduleName = 'swiper.angular';
 
-angular.module(moduleName, []).service(_swiper.serviceName, _swiper.SwiperService).directive(_swiperContainer.directiveName, _swiperContainer.SwiperContainerDirective).directive(_swiperSlide.directiveName, _swiperSlide.SwiperItemDirective).directive(_swiperRequireFocus.directiveName, _swiperRequireFocus.SwiperRequireFocusDirective).controller(_swiperContainer2.controllerName, _swiperContainer2.SwiperContainerController);
+// noinspection ES6UnusedImports
+
+angular.module(moduleName, []).service(_swiper.serviceName, _swiper.SwiperService).directive(_swiperContainer.directiveName, _swiperContainer.SwiperContainerDirective).directive(_swiperSlide.directiveName, _swiperSlide.SwiperSlideDirective).directive(_swiperRequireFocus.directiveName, _swiperRequireFocus.SwiperRequireFocusDirective).controller(_swiperContainer2.controllerName, _swiperContainer2.SwiperContainerController);
 
 /***/ }),
-/* 17 */
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.SwiperService = SwiperService;
+var findIndex = __webpack_require__(9);
+var find = __webpack_require__(21);
+var propEq = __webpack_require__(23);
+var path = __webpack_require__(32);
+var unless = __webpack_require__(13);
+var equals = __webpack_require__(4);
+var pipe = __webpack_require__(33);
+var merge = __webpack_require__(43);
+
+var serviceName = exports.serviceName = 'SwiperService';
+
+/**
+ * @ngdoc service
+ * @name swiper.angular:SwiperService
+ *
+ * @description
+ * Service de gerenciamento do swiper
+ **/
+function SwiperService() {
+    'ngInject';
+
+    var findIsMoved = find(path(['instance', 'touchEventsData', 'isMoved']));
+    var swiperInstances = [];
+    var selectedList = [];
+
+    //Maybe use a provider to make this dynamic?
+    var configs = merge({
+        slidesPerView: 'auto',
+        resistanceRatio: 0.5,
+        slideToClickedSlide: true,
+        spaceBetween: 2,
+        mousewheel: true,
+        preventClicks: true
+    });
+
+    window.exposedInstances = function () {
+        return swiperInstances.map(function (i) {
+            return i.instance;
+        });
+    };
+
+    return {
+        isInMove: function isInMove() {
+            return findIsMoved(swiperInstances);
+        },
+        getSwiperDefaultConfig: function getSwiperDefaultConfig(extend) {
+            return configs(extend || {});
+        },
+        createInstance: function createInstance(scopeId, $element) {
+            var instance = new Swiper($element, this.getSwiperDefaultConfig({
+                on: {
+                    beforeDestroy: function beforeDestroy() {
+                        return pipe(findIndex(propEq('scopeId', scopeId)), unless(equals(-1), function (index) {
+                            return swiperInstances.splice(index, 1);
+                        }))(swiperInstances);
+                    }
+                }
+            }));
+
+            swiperInstances.push({ scopeId: scopeId, instance: instance });
+            return instance;
+        },
+
+        multipleSelection: {
+            get: function get() {
+                return selectedList;
+            },
+            put: function put(x) {
+                return selectedList.push(x);
+            },
+            clear: function clear() {
+                return selectedList = [];
+            }
+        }
+    };
+}
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _isTransformer(obj) {
+  return typeof obj['@@transducer/step'] === 'function';
+}
+module.exports = _isTransformer;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _curry2 = /*#__PURE__*/__webpack_require__(0);
+
+var _reduced = /*#__PURE__*/__webpack_require__(11);
+
+var _xfBase = /*#__PURE__*/__webpack_require__(12);
+
+var XFindIndex = /*#__PURE__*/function () {
+
+  function XFindIndex(f, xf) {
+    this.xf = xf;
+    this.f = f;
+    this.idx = -1;
+    this.found = false;
+  }
+  XFindIndex.prototype['@@transducer/init'] = _xfBase.init;
+  XFindIndex.prototype['@@transducer/result'] = function (result) {
+    if (!this.found) {
+      result = this.xf['@@transducer/step'](result, -1);
+    }
+    return this.xf['@@transducer/result'](result);
+  };
+  XFindIndex.prototype['@@transducer/step'] = function (result, input) {
+    this.idx += 1;
+    if (this.f(input)) {
+      this.found = true;
+      result = _reduced(this.xf['@@transducer/step'](result, this.idx));
+    }
+    return result;
+  };
+
+  return XFindIndex;
+}();
+
+var _xfindIndex = /*#__PURE__*/_curry2(function _xfindIndex(f, xf) {
+  return new XFindIndex(f, xf);
+});
+module.exports = _xfindIndex;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _curry2 = /*#__PURE__*/__webpack_require__(0);
+
+var _dispatchable = /*#__PURE__*/__webpack_require__(10);
+
+var _xfind = /*#__PURE__*/__webpack_require__(22);
+
+/**
+ * Returns the first element of the list which matches the predicate, or
+ * `undefined` if no element matches.
+ *
+ * Dispatches to the `find` method of the second argument, if present.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category List
+ * @sig (a -> Boolean) -> [a] -> a | undefined
+ * @param {Function} fn The predicate function used to determine if the element is the
+ *        desired one.
+ * @param {Array} list The array to consider.
+ * @return {Object} The element found, or `undefined`.
+ * @see R.transduce
+ * @example
+ *
+ *      var xs = [{a: 1}, {a: 2}, {a: 3}];
+ *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
+ *      R.find(R.propEq('a', 4))(xs); //=> undefined
+ */
+
+var find = /*#__PURE__*/_curry2( /*#__PURE__*/_dispatchable(['find'], _xfind, function find(fn, list) {
+  var idx = 0;
+  var len = list.length;
+  while (idx < len) {
+    if (fn(list[idx])) {
+      return list[idx];
+    }
+    idx += 1;
+  }
+}));
+module.exports = find;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _curry2 = /*#__PURE__*/__webpack_require__(0);
+
+var _reduced = /*#__PURE__*/__webpack_require__(11);
+
+var _xfBase = /*#__PURE__*/__webpack_require__(12);
+
+var XFind = /*#__PURE__*/function () {
+
+  function XFind(f, xf) {
+    this.xf = xf;
+    this.f = f;
+    this.found = false;
+  }
+  XFind.prototype['@@transducer/init'] = _xfBase.init;
+  XFind.prototype['@@transducer/result'] = function (result) {
+    if (!this.found) {
+      result = this.xf['@@transducer/step'](result, void 0);
+    }
+    return this.xf['@@transducer/result'](result);
+  };
+  XFind.prototype['@@transducer/step'] = function (result, input) {
+    if (this.f(input)) {
+      this.found = true;
+      result = _reduced(this.xf['@@transducer/step'](result, input));
+    }
+    return result;
+  };
+
+  return XFind;
+}();
+
+var _xfind = /*#__PURE__*/_curry2(function _xfind(f, xf) {
+  return new XFind(f, xf);
+});
+module.exports = _xfind;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _curry3 = /*#__PURE__*/__webpack_require__(2);
+
+var equals = /*#__PURE__*/__webpack_require__(4);
+
+/**
+ * Returns `true` if the specified object property is equal, in
+ * [`R.equals`](#equals) terms, to the given value; `false` otherwise.
+ * You can test multiple properties with [`R.where`](#where).
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Relation
+ * @sig String -> a -> Object -> Boolean
+ * @param {String} name
+ * @param {*} val
+ * @param {*} obj
+ * @return {Boolean}
+ * @see R.whereEq, R.propSatisfies, R.equals
+ * @example
+ *
+ *      var abby = {name: 'Abby', age: 7, hair: 'blond'};
+ *      var fred = {name: 'Fred', age: 12, hair: 'brown'};
+ *      var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
+ *      var alois = {name: 'Alois', age: 15, disposition: 'surly'};
+ *      var kids = [abby, fred, rusty, alois];
+ *      var hasBrownHair = R.propEq('hair', 'brown');
+ *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
+ */
+
+var propEq = /*#__PURE__*/_curry3(function propEq(name, val, obj) {
+  return equals(val, obj[name]);
+});
+module.exports = propEq;
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -701,19 +1030,19 @@ angular.module(moduleName, []).service(_swiper.serviceName, _swiper.SwiperServic
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _arrayFromIterator = /*#__PURE__*/__webpack_require__(18);
+var _arrayFromIterator = /*#__PURE__*/__webpack_require__(25);
 
-var _containsWith = /*#__PURE__*/__webpack_require__(19);
+var _containsWith = /*#__PURE__*/__webpack_require__(26);
 
-var _functionName = /*#__PURE__*/__webpack_require__(20);
+var _functionName = /*#__PURE__*/__webpack_require__(27);
 
-var _has = /*#__PURE__*/__webpack_require__(6);
+var _has = /*#__PURE__*/__webpack_require__(5);
 
-var identical = /*#__PURE__*/__webpack_require__(21);
+var identical = /*#__PURE__*/__webpack_require__(28);
 
-var keys = /*#__PURE__*/__webpack_require__(22);
+var keys = /*#__PURE__*/__webpack_require__(29);
 
-var type = /*#__PURE__*/__webpack_require__(24);
+var type = /*#__PURE__*/__webpack_require__(31);
 
 /**
  * private _uniqContentEquals function.
@@ -859,7 +1188,7 @@ function _equals(a, b, stackA, stackB) {
 module.exports = _equals;
 
 /***/ }),
-/* 18 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -876,7 +1205,7 @@ function _arrayFromIterator(iter) {
 module.exports = _arrayFromIterator;
 
 /***/ }),
-/* 19 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -897,7 +1226,7 @@ function _containsWith(pred, x, list) {
 module.exports = _containsWith;
 
 /***/ }),
-/* 20 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -911,7 +1240,7 @@ function _functionName(f) {
 module.exports = _functionName;
 
 /***/ }),
-/* 21 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -957,7 +1286,7 @@ var identical = /*#__PURE__*/_curry2(function identical(a, b) {
 module.exports = identical;
 
 /***/ }),
-/* 22 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -965,9 +1294,9 @@ module.exports = identical;
 
 var _curry1 = /*#__PURE__*/__webpack_require__(1);
 
-var _has = /*#__PURE__*/__webpack_require__(6);
+var _has = /*#__PURE__*/__webpack_require__(5);
 
-var _isArguments = /*#__PURE__*/__webpack_require__(23);
+var _isArguments = /*#__PURE__*/__webpack_require__(30);
 
 // cover IE < 9 keys issues
 
@@ -1040,13 +1369,13 @@ var keys = /*#__PURE__*/_curry1(_keys);
 module.exports = keys;
 
 /***/ }),
-/* 23 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _has = /*#__PURE__*/__webpack_require__(6);
+var _has = /*#__PURE__*/__webpack_require__(5);
 
 var toString = Object.prototype.toString;
 var _isArguments = function _isArguments() {
@@ -1060,7 +1389,7 @@ var _isArguments = function _isArguments() {
 module.exports = _isArguments;
 
 /***/ }),
-/* 24 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1100,538 +1429,7 @@ var type = /*#__PURE__*/_curry1(function type(val) {
 module.exports = type;
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _isTransformer(obj) {
-  return typeof obj['@@transducer/step'] === 'function';
-}
-module.exports = _isTransformer;
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _curry2 = /*#__PURE__*/__webpack_require__(0);
-
-var _reduced = /*#__PURE__*/__webpack_require__(13);
-
-var _xfBase = /*#__PURE__*/__webpack_require__(14);
-
-var XFindIndex = /*#__PURE__*/function () {
-
-  function XFindIndex(f, xf) {
-    this.xf = xf;
-    this.f = f;
-    this.idx = -1;
-    this.found = false;
-  }
-  XFindIndex.prototype['@@transducer/init'] = _xfBase.init;
-  XFindIndex.prototype['@@transducer/result'] = function (result) {
-    if (!this.found) {
-      result = this.xf['@@transducer/step'](result, -1);
-    }
-    return this.xf['@@transducer/result'](result);
-  };
-  XFindIndex.prototype['@@transducer/step'] = function (result, input) {
-    this.idx += 1;
-    if (this.f(input)) {
-      this.found = true;
-      result = _reduced(this.xf['@@transducer/step'](result, this.idx));
-    }
-    return result;
-  };
-
-  return XFindIndex;
-}();
-
-var _xfindIndex = /*#__PURE__*/_curry2(function _xfindIndex(f, xf) {
-  return new XFindIndex(f, xf);
-});
-module.exports = _xfindIndex;
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.directiveName = undefined;
-exports.SwiperItemDirective = SwiperItemDirective;
-
-var _swiperContainer = __webpack_require__(8);
-
-var _equals = __webpack_require__(4);
-
-var _equals2 = _interopRequireDefault(_equals);
-
-var _ifElse = __webpack_require__(28);
-
-var _ifElse2 = _interopRequireDefault(_ifElse);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var directiveName = exports.directiveName = 'swiperSlide';
-
-/**
- * @ngdoc directive
- * @name swiper.angular#SwiperItemDirective
- * @description
- * Diretiva que cria itens na instancia do controler pai do swiped
- *
- */
-function SwiperItemDirective() {
-    'ngInject';
-
-    return {
-        restrict: 'A',
-        require: '^^' + _swiperContainer.directiveName,
-        link: function link($scope, $element, $attr, $ctrl) {
-            var swiperItem = $attr[directiveName];
-            $element.addClass('swiper-slide');
-
-            if (swiperItem !== 'center' && !$ctrl.isSwiper) {
-                $element.addClass('ng-hide');
-            }
-
-            (0, _ifElse2.default)((0, _equals2.default)('left'), function () {
-                return $ctrl.prependToSwiper;
-            }, function () {
-                return $ctrl.appendToSwiper;
-            })(swiperItem)($element);
-        }
-    };
-}
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _curry3 = /*#__PURE__*/__webpack_require__(2);
-
-var curryN = /*#__PURE__*/__webpack_require__(29);
-
-/**
- * Creates a function that will process either the `onTrue` or the `onFalse`
- * function depending upon the result of the `condition` predicate.
- *
- * @func
- * @memberOf R
- * @since v0.8.0
- * @category Logic
- * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)
- * @param {Function} condition A predicate function
- * @param {Function} onTrue A function to invoke when the `condition` evaluates to a truthy value.
- * @param {Function} onFalse A function to invoke when the `condition` evaluates to a falsy value.
- * @return {Function} A new unary function that will process either the `onTrue` or the `onFalse`
- *                    function depending upon the result of the `condition` predicate.
- * @see R.unless, R.when
- * @example
- *
- *      var incCount = R.ifElse(
- *        R.has('count'),
- *        R.over(R.lensProp('count'), R.inc),
- *        R.assoc('count', 1)
- *      );
- *      incCount({});           //=> { count: 1 }
- *      incCount({ count: 1 }); //=> { count: 2 }
- */
-
-var ifElse = /*#__PURE__*/_curry3(function ifElse(condition, onTrue, onFalse) {
-  return curryN(Math.max(condition.length, onTrue.length, onFalse.length), function _ifElse() {
-    return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
-  });
-});
-module.exports = ifElse;
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _arity = /*#__PURE__*/__webpack_require__(5);
-
-var _curry1 = /*#__PURE__*/__webpack_require__(1);
-
-var _curry2 = /*#__PURE__*/__webpack_require__(0);
-
-var _curryN = /*#__PURE__*/__webpack_require__(30);
-
-/**
- * Returns a curried equivalent of the provided function, with the specified
- * arity. The curried function has two unusual capabilities. First, its
- * arguments needn't be provided one at a time. If `g` is `R.curryN(3, f)`, the
- * following are equivalent:
- *
- *   - `g(1)(2)(3)`
- *   - `g(1)(2, 3)`
- *   - `g(1, 2)(3)`
- *   - `g(1, 2, 3)`
- *
- * Secondly, the special placeholder value [`R.__`](#__) may be used to specify
- * "gaps", allowing partial application of any combination of arguments,
- * regardless of their positions. If `g` is as above and `_` is [`R.__`](#__),
- * the following are equivalent:
- *
- *   - `g(1, 2, 3)`
- *   - `g(_, 2, 3)(1)`
- *   - `g(_, _, 3)(1)(2)`
- *   - `g(_, _, 3)(1, 2)`
- *   - `g(_, 2)(1)(3)`
- *   - `g(_, 2)(1, 3)`
- *   - `g(_, 2)(_, 3)(1)`
- *
- * @func
- * @memberOf R
- * @since v0.5.0
- * @category Function
- * @sig Number -> (* -> a) -> (* -> a)
- * @param {Number} length The arity for the returned function.
- * @param {Function} fn The function to curry.
- * @return {Function} A new, curried function.
- * @see R.curry
- * @example
- *
- *      var sumArgs = (...args) => R.sum(args);
- *
- *      var curriedAddFourNumbers = R.curryN(4, sumArgs);
- *      var f = curriedAddFourNumbers(1, 2);
- *      var g = f(3);
- *      g(4); //=> 10
- */
-
-var curryN = /*#__PURE__*/_curry2(function curryN(length, fn) {
-  if (length === 1) {
-    return _curry1(fn);
-  }
-  return _arity(length, _curryN(length, [], fn));
-});
-module.exports = curryN;
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _arity = /*#__PURE__*/__webpack_require__(5);
-
-var _isPlaceholder = /*#__PURE__*/__webpack_require__(3);
-
-/**
- * Internal curryN function.
- *
- * @private
- * @category Function
- * @param {Number} length The arity of the curried function.
- * @param {Array} received An array of arguments received thus far.
- * @param {Function} fn The function to curry.
- * @return {Function} The curried function.
- */
-
-function _curryN(length, received, fn) {
-  return function () {
-    var combined = [];
-    var argsIdx = 0;
-    var left = length;
-    var combinedIdx = 0;
-    while (combinedIdx < received.length || argsIdx < arguments.length) {
-      var result;
-      if (combinedIdx < received.length && (!_isPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)) {
-        result = received[combinedIdx];
-      } else {
-        result = arguments[argsIdx];
-        argsIdx += 1;
-      }
-      combined[combinedIdx] = result;
-      if (!_isPlaceholder(result)) {
-        left -= 1;
-      }
-      combinedIdx += 1;
-    }
-    return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length, combined, fn));
-  };
-}
-module.exports = _curryN;
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.SwiperRequireFocusDirective = SwiperRequireFocusDirective;
-SwiperRequireFocusDirective.$inject = ['$timeout'];
-
-/**
- * @ngdoc directive
- * @name swiper.angular#SwiperItemDirective
- * @description
- * Diretiva que cria itens na instancia do controler pai do swiped
- *
- */
-function SwiperRequireFocusDirective($timeout) {
-    return {
-        restrict: 'A',
-        priority: 550,
-        require: '^^swiperContainer',
-        link: function link($scope, $element, $attr, $ctrl) {
-            $timeout(function () {
-                return $ctrl.slideToElement($element[0]);
-            });
-        }
-    };
-}
-
-var directiveName = exports.directiveName = 'swiperRequireFocus';
-
-/***/ }),
 /* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.SwiperService = SwiperService;
-var findIndex = __webpack_require__(11);
-var find = __webpack_require__(33);
-var propEq = __webpack_require__(35);
-var path = __webpack_require__(36);
-var unless = __webpack_require__(10);
-var equals = __webpack_require__(4);
-var pipe = __webpack_require__(37);
-
-var serviceName = exports.serviceName = 'SwiperService';
-
-/**
- * @ngdoc service
- * @name swiper.angular:SwiperService
- *
- * @description
- * Service de gerenciamento do swiper
- **/
-function SwiperService() {
-    'ngInject';
-
-    var _self = this;
-    var swiperInstances = [];
-    /*
-    var SwiperService = angular.element(document.body).injector().get('SwiperService');
-    var instances = exposedInstances();
-    instances[1].controller.control = instances[0];
-    instances[0].controller.control = instances[1];
-    instances.forEach(i => i.update())
-    */
-    window.exposedInstances = function () {
-        return swiperInstances.map(function (i) {
-            return i.instance;
-        });
-    };
-
-    _self.getSwiperDefaultConfig = function (extend) {
-        return angular.extend({
-            slidesPerView: 'auto',
-            resistanceRatio: 0.5,
-            slideToClickedSlide: true,
-            spaceBetween: 2,
-            mousewheel: true,
-            preventClicks: true
-        }, extend || {});
-    };
-    _self.multipleSelection = function () {
-        var selectedList = [];
-        return {
-            get: function get() {
-                return selectedList;
-            },
-            put: function put(x) {
-                selectedList.push(x);
-            },
-            clear: function clear() {
-                selectedList = [];
-            }
-        };
-    }();
-
-    _self.instanceForId = function (scopeId) {
-        //TODO: faz sentido ter o register?
-        return {
-            register: function register(instance) {
-                return swiperInstances.push({ scopeId: scopeId, instance: instance });
-            },
-            remove: function remove() {
-                return pipe(findIndex(propEq('scopeId', scopeId)), unless(equals(-1), function (index) {
-                    return swiperInstances.splice(index, 1);
-                }))(swiperInstances);
-            }
-        };
-    };
-
-    _self.isInMove = function () {
-        return find(path(['instance', 'touchEventsData', 'isMoved']), swiperInstances);
-    };
-}
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _curry2 = /*#__PURE__*/__webpack_require__(0);
-
-var _dispatchable = /*#__PURE__*/__webpack_require__(12);
-
-var _xfind = /*#__PURE__*/__webpack_require__(34);
-
-/**
- * Returns the first element of the list which matches the predicate, or
- * `undefined` if no element matches.
- *
- * Dispatches to the `find` method of the second argument, if present.
- *
- * Acts as a transducer if a transformer is given in list position.
- *
- * @func
- * @memberOf R
- * @since v0.1.0
- * @category List
- * @sig (a -> Boolean) -> [a] -> a | undefined
- * @param {Function} fn The predicate function used to determine if the element is the
- *        desired one.
- * @param {Array} list The array to consider.
- * @return {Object} The element found, or `undefined`.
- * @see R.transduce
- * @example
- *
- *      var xs = [{a: 1}, {a: 2}, {a: 3}];
- *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
- *      R.find(R.propEq('a', 4))(xs); //=> undefined
- */
-
-var find = /*#__PURE__*/_curry2( /*#__PURE__*/_dispatchable(['find'], _xfind, function find(fn, list) {
-  var idx = 0;
-  var len = list.length;
-  while (idx < len) {
-    if (fn(list[idx])) {
-      return list[idx];
-    }
-    idx += 1;
-  }
-}));
-module.exports = find;
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _curry2 = /*#__PURE__*/__webpack_require__(0);
-
-var _reduced = /*#__PURE__*/__webpack_require__(13);
-
-var _xfBase = /*#__PURE__*/__webpack_require__(14);
-
-var XFind = /*#__PURE__*/function () {
-
-  function XFind(f, xf) {
-    this.xf = xf;
-    this.f = f;
-    this.found = false;
-  }
-  XFind.prototype['@@transducer/init'] = _xfBase.init;
-  XFind.prototype['@@transducer/result'] = function (result) {
-    if (!this.found) {
-      result = this.xf['@@transducer/step'](result, void 0);
-    }
-    return this.xf['@@transducer/result'](result);
-  };
-  XFind.prototype['@@transducer/step'] = function (result, input) {
-    if (this.f(input)) {
-      this.found = true;
-      result = _reduced(this.xf['@@transducer/step'](result, input));
-    }
-    return result;
-  };
-
-  return XFind;
-}();
-
-var _xfind = /*#__PURE__*/_curry2(function _xfind(f, xf) {
-  return new XFind(f, xf);
-});
-module.exports = _xfind;
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _curry3 = /*#__PURE__*/__webpack_require__(2);
-
-var equals = /*#__PURE__*/__webpack_require__(4);
-
-/**
- * Returns `true` if the specified object property is equal, in
- * [`R.equals`](#equals) terms, to the given value; `false` otherwise.
- * You can test multiple properties with [`R.where`](#where).
- *
- * @func
- * @memberOf R
- * @since v0.1.0
- * @category Relation
- * @sig String -> a -> Object -> Boolean
- * @param {String} name
- * @param {*} val
- * @param {*} obj
- * @return {Boolean}
- * @see R.whereEq, R.propSatisfies, R.equals
- * @example
- *
- *      var abby = {name: 'Abby', age: 7, hair: 'blond'};
- *      var fred = {name: 'Fred', age: 12, hair: 'brown'};
- *      var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
- *      var alois = {name: 'Alois', age: 15, disposition: 'surly'};
- *      var kids = [abby, fred, rusty, alois];
- *      var hasBrownHair = R.propEq('hair', 'brown');
- *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
- */
-
-var propEq = /*#__PURE__*/_curry3(function propEq(name, val, obj) {
-  return equals(val, obj[name]);
-});
-module.exports = propEq;
-
-/***/ }),
-/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1673,19 +1471,19 @@ var path = /*#__PURE__*/_curry2(function path(paths, obj) {
 module.exports = path;
 
 /***/ }),
-/* 37 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _arity = /*#__PURE__*/__webpack_require__(5);
+var _arity = /*#__PURE__*/__webpack_require__(6);
 
-var _pipe = /*#__PURE__*/__webpack_require__(38);
+var _pipe = /*#__PURE__*/__webpack_require__(34);
 
-var reduce = /*#__PURE__*/__webpack_require__(39);
+var reduce = /*#__PURE__*/__webpack_require__(35);
 
-var tail = /*#__PURE__*/__webpack_require__(45);
+var tail = /*#__PURE__*/__webpack_require__(41);
 
 /**
  * Performs left-to-right function composition. The leftmost function may have
@@ -1720,7 +1518,7 @@ function pipe() {
 module.exports = pipe;
 
 /***/ }),
-/* 38 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1734,7 +1532,7 @@ function _pipe(f, g) {
 module.exports = _pipe;
 
 /***/ }),
-/* 39 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1742,7 +1540,7 @@ module.exports = _pipe;
 
 var _curry3 = /*#__PURE__*/__webpack_require__(2);
 
-var _reduce = /*#__PURE__*/__webpack_require__(40);
+var _reduce = /*#__PURE__*/__webpack_require__(36);
 
 /**
  * Returns a single item by iterating through the list, successively calling
@@ -1795,17 +1593,17 @@ var reduce = /*#__PURE__*/_curry3(_reduce);
 module.exports = reduce;
 
 /***/ }),
-/* 40 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _isArrayLike = /*#__PURE__*/__webpack_require__(41);
+var _isArrayLike = /*#__PURE__*/__webpack_require__(37);
 
-var _xwrap = /*#__PURE__*/__webpack_require__(43);
+var _xwrap = /*#__PURE__*/__webpack_require__(39);
 
-var bind = /*#__PURE__*/__webpack_require__(44);
+var bind = /*#__PURE__*/__webpack_require__(40);
 
 function _arrayReduce(xf, acc, list) {
   var idx = 0;
@@ -1865,7 +1663,7 @@ function _reduce(fn, acc, list) {
 module.exports = _reduce;
 
 /***/ }),
-/* 41 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1877,7 +1675,7 @@ var _curry1 = /*#__PURE__*/__webpack_require__(1);
 
 var _isArray = /*#__PURE__*/__webpack_require__(7);
 
-var _isString = /*#__PURE__*/__webpack_require__(42);
+var _isString = /*#__PURE__*/__webpack_require__(38);
 
 /**
  * Tests whether or not an object is similar to an array.
@@ -1924,7 +1722,7 @@ var _isArrayLike = /*#__PURE__*/_curry1(function isArrayLike(x) {
 module.exports = _isArrayLike;
 
 /***/ }),
-/* 42 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1936,7 +1734,7 @@ function _isString(x) {
 module.exports = _isString;
 
 /***/ }),
-/* 43 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1965,13 +1763,13 @@ function _xwrap(fn) {
 module.exports = _xwrap;
 
 /***/ }),
-/* 44 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _arity = /*#__PURE__*/__webpack_require__(5);
+var _arity = /*#__PURE__*/__webpack_require__(6);
 
 var _curry2 = /*#__PURE__*/__webpack_require__(0);
 
@@ -2006,17 +1804,17 @@ var bind = /*#__PURE__*/_curry2(function bind(fn, thisObj) {
 module.exports = bind;
 
 /***/ }),
-/* 45 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _checkForMethod = /*#__PURE__*/__webpack_require__(15);
+var _checkForMethod = /*#__PURE__*/__webpack_require__(14);
 
 var _curry1 = /*#__PURE__*/__webpack_require__(1);
 
-var slice = /*#__PURE__*/__webpack_require__(46);
+var slice = /*#__PURE__*/__webpack_require__(42);
 
 /**
  * Returns all but the first element of the given list or string (or object
@@ -2050,13 +1848,13 @@ var tail = /*#__PURE__*/_curry1( /*#__PURE__*/_checkForMethod('tail', /*#__PURE_
 module.exports = tail;
 
 /***/ }),
-/* 46 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _checkForMethod = /*#__PURE__*/__webpack_require__(15);
+var _checkForMethod = /*#__PURE__*/__webpack_require__(14);
 
 var _curry3 = /*#__PURE__*/__webpack_require__(2);
 
@@ -2091,7 +1889,299 @@ var slice = /*#__PURE__*/_curry3( /*#__PURE__*/_checkForMethod('slice', function
 module.exports = slice;
 
 /***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _assign = /*#__PURE__*/__webpack_require__(44);
+
+var _curry2 = /*#__PURE__*/__webpack_require__(0);
+
+/**
+ * Create a new object with the own properties of the first object merged with
+ * the own properties of the second object. If a key exists in both objects,
+ * the value from the second object will be used.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category Object
+ * @sig {k: v} -> {k: v} -> {k: v}
+ * @param {Object} l
+ * @param {Object} r
+ * @return {Object}
+ * @see R.mergeDeepRight, R.mergeWith, R.mergeWithKey
+ * @example
+ *
+ *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+ *      //=> { 'name': 'fred', 'age': 40 }
+ *
+ *      var resetToDefault = R.merge(R.__, {x: 0});
+ *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
+ * @symb R.merge({ x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: 5, z: 3 }
+ */
+
+var merge = /*#__PURE__*/_curry2(function merge(l, r) {
+  return _assign({}, l, r);
+});
+module.exports = merge;
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _objectAssign = /*#__PURE__*/__webpack_require__(45);
+
+module.exports = typeof Object.assign === 'function' ? Object.assign : _objectAssign;
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _has = /*#__PURE__*/__webpack_require__(5);
+
+// Based on https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+
+
+function _objectAssign(target) {
+  if (target == null) {
+    throw new TypeError('Cannot convert undefined or null to object');
+  }
+
+  var output = Object(target);
+  var idx = 1;
+  var length = arguments.length;
+  while (idx < length) {
+    var source = arguments[idx];
+    if (source != null) {
+      for (var nextKey in source) {
+        if (_has(nextKey, source)) {
+          output[nextKey] = source[nextKey];
+        }
+      }
+    }
+    idx += 1;
+  }
+  return output;
+}
+module.exports = _objectAssign;
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.directiveName = undefined;
+exports.SwiperSlideDirective = SwiperSlideDirective;
+
+var _swiperContainer = __webpack_require__(8);
+
+var _equals = __webpack_require__(4);
+
+var _equals2 = _interopRequireDefault(_equals);
+
+var _ifElse = __webpack_require__(16);
+
+var _ifElse2 = _interopRequireDefault(_ifElse);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var directiveName = exports.directiveName = 'swiperSlide';
+
+/**
+ * @ngdoc directive
+ * @name swiper.angular#SwiperSlideDirective
+ * @description
+ * Diretiva que cria itens na instancia do controler pai do swiped
+ *
+ */
+function SwiperSlideDirective() {
+    'ngInject';
+
+    return {
+        restrict: 'A',
+        require: '^^' + _swiperContainer.directiveName,
+        link: function link($scope, $element, $attr, $ctrl) {
+            var swiperItem = $attr[directiveName];
+            var add = $ctrl.addSlide($element);
+
+            $element.addClass('swiper-slide');
+            if (swiperItem !== 'center' && !$ctrl.willUseSwiper) {
+                $element.addClass('ng-hide');
+            }
+
+            (0, _ifElse2.default)((0, _equals2.default)('left'), add.toLeft, add.toRight)(swiperItem);
+        }
+    };
+}
+
+/***/ }),
 /* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _arity = /*#__PURE__*/__webpack_require__(6);
+
+var _curry1 = /*#__PURE__*/__webpack_require__(1);
+
+var _curry2 = /*#__PURE__*/__webpack_require__(0);
+
+var _curryN = /*#__PURE__*/__webpack_require__(48);
+
+/**
+ * Returns a curried equivalent of the provided function, with the specified
+ * arity. The curried function has two unusual capabilities. First, its
+ * arguments needn't be provided one at a time. If `g` is `R.curryN(3, f)`, the
+ * following are equivalent:
+ *
+ *   - `g(1)(2)(3)`
+ *   - `g(1)(2, 3)`
+ *   - `g(1, 2)(3)`
+ *   - `g(1, 2, 3)`
+ *
+ * Secondly, the special placeholder value [`R.__`](#__) may be used to specify
+ * "gaps", allowing partial application of any combination of arguments,
+ * regardless of their positions. If `g` is as above and `_` is [`R.__`](#__),
+ * the following are equivalent:
+ *
+ *   - `g(1, 2, 3)`
+ *   - `g(_, 2, 3)(1)`
+ *   - `g(_, _, 3)(1)(2)`
+ *   - `g(_, _, 3)(1, 2)`
+ *   - `g(_, 2)(1)(3)`
+ *   - `g(_, 2)(1, 3)`
+ *   - `g(_, 2)(_, 3)(1)`
+ *
+ * @func
+ * @memberOf R
+ * @since v0.5.0
+ * @category Function
+ * @sig Number -> (* -> a) -> (* -> a)
+ * @param {Number} length The arity for the returned function.
+ * @param {Function} fn The function to curry.
+ * @return {Function} A new, curried function.
+ * @see R.curry
+ * @example
+ *
+ *      var sumArgs = (...args) => R.sum(args);
+ *
+ *      var curriedAddFourNumbers = R.curryN(4, sumArgs);
+ *      var f = curriedAddFourNumbers(1, 2);
+ *      var g = f(3);
+ *      g(4); //=> 10
+ */
+
+var curryN = /*#__PURE__*/_curry2(function curryN(length, fn) {
+  if (length === 1) {
+    return _curry1(fn);
+  }
+  return _arity(length, _curryN(length, [], fn));
+});
+module.exports = curryN;
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _arity = /*#__PURE__*/__webpack_require__(6);
+
+var _isPlaceholder = /*#__PURE__*/__webpack_require__(3);
+
+/**
+ * Internal curryN function.
+ *
+ * @private
+ * @category Function
+ * @param {Number} length The arity of the curried function.
+ * @param {Array} received An array of arguments received thus far.
+ * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
+ */
+
+function _curryN(length, received, fn) {
+  return function () {
+    var combined = [];
+    var argsIdx = 0;
+    var left = length;
+    var combinedIdx = 0;
+    while (combinedIdx < received.length || argsIdx < arguments.length) {
+      var result;
+      if (combinedIdx < received.length && (!_isPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)) {
+        result = received[combinedIdx];
+      } else {
+        result = arguments[argsIdx];
+        argsIdx += 1;
+      }
+      combined[combinedIdx] = result;
+      if (!_isPlaceholder(result)) {
+        left -= 1;
+      }
+      combinedIdx += 1;
+    }
+    return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length, combined, fn));
+  };
+}
+module.exports = _curryN;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.directiveName = undefined;
+exports.SwiperRequireFocusDirective = SwiperRequireFocusDirective;
+
+var _swiperContainer = __webpack_require__(8);
+
+SwiperRequireFocusDirective.$inject = ['$timeout'];
+
+/**
+ * @ngdoc directive
+ * @name swiper.angular#SwiperItemDirective
+ * @description
+ * Diretiva que cria itens na instancia do controler pai do swiped
+ *
+ */
+function SwiperRequireFocusDirective($timeout) {
+    return {
+        restrict: 'A',
+        priority: 550,
+        require: '^^' + _swiperContainer.directiveName,
+        link: function link($scope, $element, $attr, $ctrl) {
+            $timeout(function () {
+                return $ctrl.slideToElement($element[0]);
+            });
+        }
+    };
+}
+
+var directiveName = exports.directiveName = 'swiperRequireFocus';
+
+/***/ }),
+/* 50 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

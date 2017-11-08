@@ -3,7 +3,7 @@ import { moduleName as SwiperModule } from '../swiper.module';
 import DemoSCSS from './demo.css';
 
 angular
-    .module('AppModule', [SwiperModule])
+    .module('ionicApp', [SwiperModule, 'ionic'])
     .controller(controllerName, AppController);
 
 

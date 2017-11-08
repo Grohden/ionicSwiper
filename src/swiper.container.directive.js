@@ -6,11 +6,12 @@ import {
  * @ngdoc directive
  * @name swiper.angular#SwiperContainerDirective
  * @description
- * Diretiva wrapper da lib swiped
+ * Wrapper directive for swiper
  *
  */
 export function SwiperContainerDirective($timeout) {
     'ngInject';
+
     return {
         restrict: 'A',
         controller: controllerName,
