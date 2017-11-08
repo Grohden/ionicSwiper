@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>Ionic List Directive</title>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.3/css/swiper.css"/>
+        <link rel="stylesheet" href="https://code.ionicframework.com/nightly/css/ionic.css"/>
+        <link rel="stylesheet" href="demo.css"/>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
+        <script type="text/javascript" src="https://code.ionicframework.com/nightly/js/ionic.bundle.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.3/js/swiper.min.js"></script>
+        <script type="text/javascript" src="./demo.bundle.js"></script>
+    </head>
+
+    <body ng-app="AppModule" ng-controller="AppController as ctrl">
+
+        <ion-header-bar class="bar-positive">
+            <h1 class="title">Ionic V1 list with both side swipes</h1>
+        </ion-header-bar>
+
+        <ion-content>
+
+            <div class="card">
+                <div class="item item-text-wrap">
+                    I was able to make a 'ionic swipe' with swiper, this is just and usage example.
+                </div>
+            </div>
+            <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+
+            <ion-list>
+                <div class="swiper-container" swiper-container="true" ng-repeat="item in ctrl.items">
+                    <div class="swiper-wrapper">
+                        <ion-item class="central-item" swiper-slide="center" swiper-require-focus>
+                            Item {{:: item.id }}
+                        </ion-item>
+                        <ion-item class="side-item" swiper-slide="right">
+                            Right
+                        </ion-item>
+                        <ion-item class="side-item" swiper-slide="left">
+                            Left
+                        </ion-item>
+                    </div>
+                </div>
+
+            </ion-list>
+
+        </ion-content>
+</body>
+</html>
