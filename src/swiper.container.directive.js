@@ -1,12 +1,13 @@
 import {
-    controllerName
+    controllerName,
+    controllerAsName
 } from './swiper.container.controller';
 
 /**
  * @ngdoc directive
- * @name swiper.angular#SwiperContainerDirective
+ * @name ionic.swiper#SwiperContainerDirective
  * @description
- * Wrapper directive for swiper
+ * An wrapper directive for swiper container
  *
  */
 export function SwiperContainerDirective($timeout) {
@@ -15,14 +16,15 @@ export function SwiperContainerDirective($timeout) {
     return {
         restrict: 'A',
         controller: controllerName,
+        controllerAs: controllerAsName,
         link: function ($scope, $element, $attr, $ctrl) {
     
-            const classWatcher = $attr.$observe(
+            const classObserver = $attr.$observe(
                 'class',
                 () => $timeout($ctrl.callUpdate)
             );
     
-            $scope.$on('$destroy', () => classWatcher());
+            $scope.$on('$destroy', () => classObserver());
         }
     };
 }

@@ -1,72 +1,64 @@
-const findIndex = require('ramda/src/findIndex');
-const find = require('ramda/src/find');
-const propEq = require('ramda/src/propEq');
-const path = require('ramda/src/path');
-const unless = require('ramda/src/unless');
-const equals = require('ramda/src/equals');
-const pipe = require('ramda/src/pipe');
-const merge = require('ramda/src/merge');
+import {equals, merge, pipe, unless} from 'ramda'
+import Swiper from 'swiper';
+import {findIndexForContainerId, findIsMoved} from "./functional.core";
+import {SWIPER_DESTROY_EVENT} from "./swiper.events";
+
 
 export const serviceName = 'SwiperService';
 
 /**
  * @ngdoc service
- * @name swiper.angular:SwiperService
+ * @name ionic.swiper:SwiperService
  *
  * @description
  * Service de gerenciamento do swiper
  **/
-export function SwiperService() {
+export function SwiperService($rootScope) {
     'ngInject';
 
-    const findIsMoved = find(path(['instance','touchEventsData','isMoved']));
+    const _self = this;
     const swiperInstances = [];
-    let selectedList = [];
 
-    //Maybe use a provider to make this dynamic?
+    //Maybe use a provider to make this more dynamic?
     const configs = merge({
         slidesPerView: 'auto',
         resistanceRatio: 0.5,
         slideToClickedSlide: true,
         spaceBetween: 2,
-        mousewheel:true,
-        preventClicks: true
+        mousewheel: true,
+        preventClicks: true,
+        controller: {
+            control: []
+        }
     });
 
-    window.exposedInstances = () => swiperInstances.map( i => i.instance);
+    $rootScope.$on(SWIPER_DESTROY_EVENT, function(event, containerId){
+        pipe(
+            findIndexForContainerId(containerId),
+            //TODO: handle deletion from selected!
+            unless(equals(-1), index => swiperInstances.splice(index, 1))
+        )(swiperInstances);
+    });
 
-    return {
-        isInMove(){
-            return findIsMoved(swiperInstances);
-        },
-        getSwiperDefaultConfig(extend){
-            return configs(extend || {});
-        },
-        createInstance(scopeId, $element){
-            const instance = new Swiper($element, this.getSwiperDefaultConfig({
-                on:{
-                    beforeDestroy(){
-                        return pipe(
-                            findIndex(propEq('scopeId', scopeId)),
-                            unless(equals(-1), index => swiperInstances.splice(index, 1))
-                        )(swiperInstances);
-                    }
+    _self.getInstances = function(){
+        return swiperInstances;
+    };
+
+    _self.isInMove = function () {
+        return findIsMoved(swiperInstances);
+    };
+    _self.getSwiperDefaultConfig = function (extend) {
+        return configs(extend || {});
+    };
+    _self.createInstance = function (containerId, $element) {
+        const instance = new Swiper($element, this.getSwiperDefaultConfig({
+            on: {
+                beforeDestroy() {
+                    $rootScope.$emit(SWIPER_DESTROY_EVENT, (containerId));
                 }
-            }));
-
-            swiperInstances.push({scopeId, instance});
-            return instance;
-        },
-        multipleSelection: {
-            get(){
-                return selectedList;
-            },
-            put(x){
-                return selectedList.push(x);
-            },
-            clear(){
-                return selectedList = [];
             }
-        }
-    }
+        }));
+        swiperInstances.push({containerId, instance});
+        return instance;
+    };
 }

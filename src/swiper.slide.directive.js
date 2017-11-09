@@ -1,15 +1,13 @@
 import {directiveName as containerName} from './swiper.container.directive';
-import equals from "ramda/src/equals";
-import ifElse from 'ramda/src/ifElse';
+import {equals, ifElse} from 'ramda';
 
 export const directiveName = 'swiperSlide';
 
-
 /**
  * @ngdoc directive
- * @name swiper.angular#SwiperSlideDirective
+ * @name ionic.swiper#SwiperSlideDirective
  * @description
- * Diretiva que cria itens na instancia do controler pai do swiped
+ * This directive asks the controller to create swiper slides.
  *
  */
 export function SwiperSlideDirective() {
@@ -23,10 +21,9 @@ export function SwiperSlideDirective() {
             const add = $ctrl.addSlide($element);
 
             $element.addClass('swiper-slide');
-            if(swiperItem !== 'center' && !$ctrl.willUseSwiper){
+            if(!$ctrl.willUseSwiper && swiperItem !== 'center'){
                 $element.addClass('ng-hide');
             }
-
 
             ifElse(
                 equals('left'),

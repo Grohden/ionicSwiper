@@ -1,15 +1,17 @@
 {
-  "name": "angularswiper",
-  "version": "0.1.0",
+  "name": "ionicswiper",
+  "version": "0.2.0",
   "description": "An angular wrapper for swiper focused on ionic v1 as an 'swipe' lib (not slide)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -p",
-    "start": "webpack --watch"
+    "test": "karma start",
+    "build": "(webpack -p --progress)",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --open"
   },
   "keywords": [
-    "ionicv1",
+    "ionic",
+    "v1",
     "angular",
     "swiper"
   ],

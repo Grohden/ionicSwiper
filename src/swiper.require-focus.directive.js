@@ -4,9 +4,13 @@ SwiperRequireFocusDirective.$inject = ['$timeout'];
 
 /**
  * @ngdoc directive
- * @name swiper.angular#SwiperItemDirective
+ * @name ionic.swiper#SwiperItemDirective
  * @description
- * Diretiva que cria itens na instancia do controler pai do swiped
+ * This directive makes a 'slide to me' request after all the other slides
+ * have been added
+ * You will probably not use it, because the user can see the sliding transition
+ * If you dont want this to happen, you can use the swiper-slide with instructions
+ * like swiper-slide="left|right|center"
  *
  */
 export function SwiperRequireFocusDirective($timeout) {

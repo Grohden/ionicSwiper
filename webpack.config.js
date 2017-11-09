@@ -1,5 +1,6 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+//const webpack = require('webpack');
 
 module.exports = {
     watch: false,
@@ -8,6 +9,7 @@ module.exports = {
             //Load js
             {
                 test: /\.js?$/,
+                //exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['env'],
@@ -38,6 +40,11 @@ module.exports = {
         './dist/swiper': './src/swiper.module.js',
         './demo/demo':'./src/demo/app.module.js'
     },
+    //devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './demo',
+        //hot:true
+    },
     output: {
         path: __dirname,
         filename: '[name].bundle.js'
@@ -48,6 +55,8 @@ module.exports = {
                 return getPath('[name].css').replace('css/js', 'css');
             },
             allChunks: true
-        })
+        }),
+        //new webpack.NamedModulesPlugin(),
+        //new webpack.HotModuleReplacementPLugin()
     ]
 };
