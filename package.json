@@ -1,8 +1,12 @@
 {
   "name": "ionicswiper",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "An angular wrapper for swiper focused on ionic v1 as an 'swipe' lib (not slide)",
-  "main": "index.js",
+  "main": "src/swiper.module.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Grohden/ionicSwiper"
+  },
   "scripts": {
     "test": "karma start",
     "build": "(webpack -p --progress)",
@@ -16,7 +20,7 @@
     "swiper"
   ],
   "author": "Gabriel Rohden",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

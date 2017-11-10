@@ -21,7 +21,11 @@
 
             <div class="card">
                 <div class="item item-text-wrap">
-                    A simple list using ionic v1 list combined with ionic swiper
+                    A simple list using ionic v1 list combined with ionic swiper.
+                    <br>
+                    <strong>This example is for a mobile context, so if you are in a browser, you should
+                        emulate an device to get a better experience.
+                    </strong>
                 </div>
             </div>
             <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
@@ -29,13 +33,13 @@
             <ion-list>
                 <div class="swiper-container"
                      swiper-container="true"
+                     ng-init="selectHolder = {};"
                      ng-repeat="item in ctrl.items">
-                    <div class="swiper-wrapper" ng-class="{'selected': spcCtrl.isSelected}">
+                    <div class="swiper-wrapper" ng-class="{'selected': selectHolder.isSelected}">
                         <ion-item class="central-item"
                                   swiper-slide="center"
-                                  on-hold="spcCtrl.isSelected = ctrl.handleHold(item, containerId)">
-                            {{spcCtrl.isSelected}}
-                            Item {{:: item.id }}
+                                  on-hold="ctrl.handleHold(selectHolder, containerId);">
+                            Item {{:: item.id }} {{selectHolder.isSelected ? "is selected" : "isn't selected"}}
                         </ion-item>
                         <ion-item class="side-item" swiper-slide="right">
                             Right

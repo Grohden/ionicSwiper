@@ -10,8 +10,8 @@ import {
  * An wrapper directive for swiper container
  *
  */
-export function SwiperContainerDirective($timeout) {
-    'ngInject';
+export /* @ngInject */ function SwiperContainerDirective($timeout) {
+    'use strict';
 
     return {
         restrict: 'A',

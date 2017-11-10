@@ -11,31 +11,18 @@ export const serviceName = 'SwiperService';
  * @name ionic.swiper:SwiperService
  *
  * @description
- * Service de gerenciamento do swiper
+ * Swiper instances management service
  **/
-export function SwiperService($rootScope) {
-    'ngInject';
+export /* @ngInject */ function SwiperService($rootScope, SwiperConfigurations) {
+    'use strict';
 
     const _self = this;
     const swiperInstances = [];
-
-    //Maybe use a provider to make this more dynamic?
-    const configs = merge({
-        slidesPerView: 'auto',
-        resistanceRatio: 0.5,
-        slideToClickedSlide: true,
-        spaceBetween: 2,
-        mousewheel: true,
-        preventClicks: true,
-        controller: {
-            control: []
-        }
-    });
+    const configs = merge(SwiperConfigurations);
 
     $rootScope.$on(SWIPER_DESTROY_EVENT, function(event, containerId){
         pipe(
             findIndexForContainerId(containerId),
-            //TODO: handle deletion from selected!
             unless(equals(-1), index => swiperInstances.splice(index, 1))
         )(swiperInstances);
     });
@@ -44,15 +31,18 @@ export function SwiperService($rootScope) {
         return swiperInstances;
     };
 
-    _self.isInMove = function () {
-        return findIsMoved(swiperInstances);
-    };
     _self.getSwiperDefaultConfig = function (extend) {
         return configs(extend || {});
     };
+
+    _self.isInMove = function () {
+        return findIsMoved(swiperInstances);
+    };
+
     _self.createInstance = function (containerId, $element) {
-        const instance = new Swiper($element, this.getSwiperDefaultConfig({
+        const instance = new Swiper($element, _self.getSwiperDefaultConfig({
             on: {
+                //FIXME: if the user overrides this, the code will probably break.
                 beforeDestroy() {
                     $rootScope.$emit(SWIPER_DESTROY_EVENT, (containerId));
                 }

@@ -19,8 +19,8 @@ export const controllerAsName = 'spcCtrl';
  * @require $element
  *
  **/
-export function SwiperContainerController($element, $scope, $attrs, SwiperService) {
-    'ngInject';
+export /* @ngInject */ function SwiperContainerController($element, $scope, $attrs, SwiperService) {
+    'use strict';
 
     const _self = this;
     const swiperInstance = SwiperService.createInstance($scope.$id, $element);

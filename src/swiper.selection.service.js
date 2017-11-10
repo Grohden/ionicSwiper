@@ -1,19 +1,22 @@
-import {complement, cond, equals, ifElse, isNil, pipe, T, unless} from 'ramda'
+import {complement, cond, equals, forEach, ifElse, isNil, pipe, T, unless} from 'ramda'
 import {findForContainerId, findIndexForContainerId, isFinalIndex, isFirstIndex, toInstances} from "./functional.core";
 import {SWIPER_DESTROY_EVENT} from "./swiper.events";
 
+const clearAllControllers = pipe(toInstances,forEach( i => i.controller.control = []));
 
 export const serviceName = 'SwiperSelectionService';
 
 /**
  * @ngdoc service
  * @name ionic.swiper:SwiperSelectionService
+ * @requires $rootScope
+ * @requires SwiperService
  *
  * @description
  * Swiper selection service to handle list item selections
  **/
-export function SwiperSelectionService($rootScope, SwiperService) {
-    'ngInject';
+export /* @ngInject */  function SwiperSelectionService($rootScope, SwiperService) {
+    'use strict';
 
     const _self = this;
     let selectedList = [];
@@ -27,6 +30,7 @@ export function SwiperSelectionService($rootScope, SwiperService) {
     };
 
     _self.clear = function() {
+        clearAllControllers(selectedList);
         return selectedList = [];
     };
 

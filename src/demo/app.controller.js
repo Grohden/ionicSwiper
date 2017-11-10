@@ -3,13 +3,14 @@ import map from 'ramda/src/map';
 import range from 'ramda/src/range';
 
 export const controllerName = 'AppController';
-export function AppController (SwiperService, SwiperSelectionService){
-    'ngInject';
+export /* @ngInject */ function AppController (SwiperService, SwiperSelectionService){
+    'use strict';
+
     const _self = this;
 
     _self.items = map(x => ({id:x}), range(1,100));
 
-    _self.handleHold = function(item, containerId){
+    _self.handleHold = function(selectHolder, containerId){
         console.log(containerId);
         return ifElse(
             SwiperService.isInMove,
@@ -19,8 +20,8 @@ export function AppController (SwiperService, SwiperSelectionService){
             },
             () => {
                 console.log('hold');
-                SwiperSelectionService.toggleToSelection(containerId);
-                return true;
+                selectHolder.isSelected = SwiperSelectionService.toggleToSelection(containerId);
+                return selectHolder.isSelected;
             }
         )();
     };

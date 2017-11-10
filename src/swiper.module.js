@@ -1,3 +1,4 @@
+import {SwiperConfigurationsProvider, providerName} from './swiper.configs.provider';
 import {SwiperService, serviceName as swiperService} from './swiper.service';
 import {SwiperSelectionService, serviceName as swiperSelectionService} from './swiper.selection.service';
 import {SwiperContainerDirective, directiveName as containerDirective} from './swiper.container.directive';
@@ -9,8 +10,10 @@ import {SwiperContainerController, controllerName as scCtrl} from './swiper.cont
 import SwiperDefaultStyles from 'swiper/dist/css/swiper.min.css';
 
 export const moduleName = 'ionic.swiper';
+
 angular
     .module(moduleName, [])
+    .provider   (providerName,           SwiperConfigurationsProvider)
     .service    (swiperService,          SwiperService)
     .service    (swiperSelectionService, SwiperSelectionService)
     .directive  (containerDirective,     SwiperContainerDirective)

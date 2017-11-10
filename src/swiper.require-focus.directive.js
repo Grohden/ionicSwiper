@@ -1,10 +1,11 @@
 import {directiveName as containerName} from './swiper.container.directive';
 
-SwiperRequireFocusDirective.$inject = ['$timeout'];
-
+export const directiveName = 'swiperRequireFocus';
 /**
  * @ngdoc directive
- * @name ionic.swiper#SwiperItemDirective
+ * @name ionic.swiper#SwiperRequireFocusDirective
+ * @requires $timeout
+ *
  * @description
  * This directive makes a 'slide to me' request after all the other slides
  * have been added
@@ -13,7 +14,7 @@ SwiperRequireFocusDirective.$inject = ['$timeout'];
  * like swiper-slide="left|right|center"
  *
  */
-export function SwiperRequireFocusDirective($timeout) {
+export /* @ngInject */ function SwiperRequireFocusDirective($timeout) {
     return {
         restrict: 'A',
         priority:550,
@@ -25,4 +26,3 @@ export function SwiperRequireFocusDirective($timeout) {
 }
 
 
-export const directiveName = 'swiperRequireFocus';
