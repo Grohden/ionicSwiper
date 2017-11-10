@@ -6,6 +6,10 @@ My version of angular swiper is focused on **ionic v1**, since ionic v1 lists do
 'simple' wrappers for Swiper (which seems to be the one used in ionic 2)
 to support this.
 
+## Install
+
+`npm install ionic-swiper`
+
 ## Demo
 
 An demo is available [here](https://grohden.github.io/ionicSwiper/) and on the demo folder
