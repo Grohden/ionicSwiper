@@ -10,7 +10,7 @@ to support this.
 
 A prototype demo is available [here](https://codepen.io/Grohden/pen/EbjWBe) and on the demo folder
 
-##Usage
+## Usage
 
 You just need to import the `swiper.bundle.js` in  the HTML like this:
 ```html
@@ -28,12 +28,12 @@ import {moduleName as angularSwiperModule} from 'angularSwiper/src/swiper.module
 angular.module('yourModule',[angularSwiperModule]);
 ```
 
-##Issues
+## Issues
 
 My implementation seems to not work properly with ionic's `collection-repeat`,
 it works partially, but for some items swiper seems to get a 'free swipe mode'.
 
-##Development
+## Development
 
 `yarn install` should setup everything to dev env.
 then you can run `npm start` and start the development
