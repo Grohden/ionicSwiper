@@ -8,7 +8,7 @@ export /* @ngInject */ function AppController (SwiperService, SwiperSelectionSer
 
     const _self = this;
 
-    _self.items = map(x => ({id:x}), range(1,100));
+    _self.items = map(x => ({id:x}), range(1,25));
 
     _self.handleHold = function(selectHolder, containerId){
         console.log(containerId);

@@ -21,16 +21,16 @@ You just need to import the `swiper.bundle.js` in  the HTML like this:
 <link type="text/css" href="swiper.css"/>
 <script type="text/javascript" src="swiper.bundle.js"></script>
 <script type="text/javascript">
-    angular.module('yourModule',['swiper.angular']);
+    angular.module('yourModule',['ionic.swiper']);
 </script>
 ```
 
 
 Or if you use **webpack** you can use like this:
 ```javascript
-import {moduleName as angularSwiperModule} from 'angularSwiper/src/swiper.module';
+import {moduleName as ionicSwiperModule} from 'ionic-swiper';
 
-angular.module('yourModule',[angularSwiperModule]);
+angular.module('yourModule',[ionicSwiperModule]);
 
 //and import the .css your module generates in your html.
 ```
@@ -77,14 +77,14 @@ The swiper selection service manages a **swipe synchronization between selection
 |---------------------------------------------------------	|--------------------------------------------------------------------------------------------------------------	|
 | SwiperSelectionService.get()                            	| returns all the current selection synchronized swiper instances                                              	|
 | SwiperSelectionService.clear()                          	| removes all the selected instances controllers and clears the selected list                                  	|
-| SwiperSelectionService.putInSelection(containerId)      	| Put the id associated swiper instance in the selection list and sincronizes the swipe                        	|
-| SwiperSelectionService.removeFromSelection(containerId) 	| Removes the id associated swiper instance from selection and remove swipe synchronization                    	|
+| SwiperSelectionService.putInSelection(containerId)      	| Put the id associated with swiper instance in the selection list and synchronizes the swipe                   |
+| SwiperSelectionService.removeFromSelection(containerId) 	| Removes the id associated with swiper instance from selection and remove swipe synchronization                |
 | SwiperSelectionService.toggleToSelection(containerId)   	| Uses internally `putInSelection` and `removeFromSelection`, checking if the provided id is in selection list 	|
 
 #### Exposed properties in scope
 
-Most of the swiper management is done by using an id, this id is exposed by `swiperContainer` directive
-used example:
+Most of the swiper management is done by using an id, this id is exposed by `swiperContainer` directive as `containerId`,
+an example:
 ```html
 <div 
     swiper-container="true"
@@ -96,10 +96,10 @@ used example:
             <ion-item swiper-slide="center">
               This swiper container id is {{:: containerId }}
             </ion-item>
-            <ion-item class="side-item" swiper-slide="right">
+            <ion-item swiper-slide="right">
                 Right Button
             </ion-item>
-            <ion-item class="side-item" swiper-slide="left">
+            <ion-item swiper-slide="left">
                 Left Button
             </ion-item>
     </div>
