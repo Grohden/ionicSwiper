@@ -8,7 +8,7 @@ to support this.
 
 ## Demo
 
-A prototype demo is available [here](https://codepen.io/Grohden/pen/EbjWBe) and on the demo folder
+An demo is available [here](https://grohden.github.io/ionicSwiper/) and on the demo folder
 
 ## Usage
 
@@ -42,8 +42,8 @@ angular.module('yourModule',[angularSwiperModule]);
 You can **override** the default configurations for swiper with 
 `SwiperConfigurationsProvider` on the config phase 
 like the shown on below:
-```
-config.$inject['SwiperConfigurationsProvider']
+```javascript
+config.$inject = ['SwiperConfigurationsProvider'];
 function config(SwiperConfigurationsProvider) {
     'use strict';
     SwiperConfigurationsProvider.useAsDefaultConfigs({
@@ -107,6 +107,9 @@ used example:
 My implementation seems to not work properly with ionic's `collection-repeat`,
 it works partially, but for some items swiper seems to get a 'free swipe mode'.
 
+There are some problems with ionic list scroll **on browser mode**, it seems that swiper take the 'drag'/scroll event to itself.
+
+
 ## Development
 
 `yarn install` should setup everything to dev env.
@@ -121,4 +124,3 @@ then you can use the dist bundle.
 
 * **Swiper is a SLIDE lib**, so there are some limitations in this lib..
 
-* There are some problems with ionic list scroll **on browser mode**, it seems that swiper take the 'drag'/scroll event to itself.
