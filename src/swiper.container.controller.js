@@ -1,4 +1,5 @@
 import {directiveName} from "./swiper.container.directive";
+import {SWIPER_DESTROY_EVENT} from "./swiper.events";
 
 const unless = require('ramda/src/unless');
 const equals = require('ramda/src/equals');
@@ -19,17 +20,21 @@ export const controllerAsName = 'spcCtrl';
  * @require $element
  *
  **/
-export /* @ngInject */ function SwiperContainerController($element, $scope, $attrs, SwiperService) {
+export /* @ngInject */ function SwiperContainerController($rootScope, $element, $scope, $attrs, SwiperService) {
     'use strict';
 
     const _self = this;
     const swiperInstance = SwiperService.createInstance($scope.$id, $element);
 
-    //Destroy swiper instance, which calls SwiperService on destroy function
-    $scope.$on('$destroy', swiperInstance.destroy);
-
     //exposes scope id as container id
     $scope.containerId = $scope.$id;
+
+    //Destroy swiper instance, which calls SwiperService on destroy function
+    $scope.$on('$destroy', () => {
+        $rootScope.$emit(SWIPER_DESTROY_EVENT, $scope.containerId);
+    });
+
+
 
     _self.willUseSwiper = $scope.$eval($attrs[directiveName]);
 

@@ -22,7 +22,7 @@ export /* @ngInject */  function SwiperSelectionService($rootScope, SwiperServic
     let selectedList = [];
 
     $rootScope.$on(SWIPER_DESTROY_EVENT, function(event,containerId){
-        removeFromSelection(containerId);
+        _self.removeFromSelection(containerId);
     });
 
     _self.get = function() {

@@ -16,20 +16,9 @@ module.exports = function(config) {
         files: [
 
             './node_modules/angular/angular.js',
-
-            './www/lib/ionic/js/ionic.bundle.min.js',
-            './www/lib/angular-resource/angular-resource.min.js',
-            './www/lib/angular-messages/angular-messages.min.js',
-            './www/lib/jquery/dist/jquery.min.js',
-            './www/lib/please.js/please.min.js',
-            './www/lib/ng-walkthrough/ng-walkthrough.js',
-            './www/lib/angular-dynamic-locale/tmhDynamicLocale.min.js',
-            './www/lib/ngCordova/dist/ng-cordova.min.js',
-            './www/cordova.js',
             './node_modules/angular-mocks/angular-mocks.js',
-            './www/js/app.bootstrap.bundle.js',
-            './www/js/app.bundle.js',
-            './tests/*tests.js'
+            './dist/swiper.bundle.js',
+            './test/*tests.js'
     
         ],
         

@@ -55,8 +55,6 @@ function config(SwiperConfigurationsProvider) {
     })
 }
 ```
-Please note that for now, you should not override the *beforeDestroy* 
-event, since its used to detect when to remove swiper instances from the provided services.
 
 #### SwiperService
 

@@ -23,7 +23,10 @@ export /* @ngInject */ function SwiperService($rootScope, SwiperConfigurations) 
     $rootScope.$on(SWIPER_DESTROY_EVENT, function(event, containerId){
         pipe(
             findIndexForContainerId(containerId),
-            unless(equals(-1), index => swiperInstances.splice(index, 1))
+            unless(equals(-1), index => {
+                swiperInstances[index].instance.destroy();
+                swiperInstances.splice(index, 1);
+            })
         )(swiperInstances);
     });
 
@@ -40,14 +43,7 @@ export /* @ngInject */ function SwiperService($rootScope, SwiperConfigurations) 
     };
 
     _self.createInstance = function (containerId, $element) {
-        const instance = new Swiper($element, _self.getSwiperDefaultConfig({
-            on: {
-                //FIXME: if the user overrides this, the code will probably break.
-                beforeDestroy() {
-                    $rootScope.$emit(SWIPER_DESTROY_EVENT, (containerId));
-                }
-            }
-        }));
+        const instance = new Swiper($element, _self.getSwiperDefaultConfig());
         swiperInstances.push({containerId, instance});
         return instance;
     };

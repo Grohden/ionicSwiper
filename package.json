@@ -23,6 +23,8 @@
   "author": "Gabriel Rohden",
   "license": "MIT",
   "devDependencies": {
+    "angular": "^1.6.6",
+    "angular-mocks": "^1.6.6",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -38,7 +40,6 @@
     "webpack": "^3.8.1"
   },
   "dependencies": {
-    "angular": "^1.6.6",
     "ramda": "^0.25.0",
     "swiper": "^4.0.5"
   }
