@@ -3,7 +3,7 @@ export const providerName = 'SwiperConfigurations';
 
 /**
  * @ngdoc provider
- * @name ionic.swiper.SwiperConfigurationsProvider
+ * @name SwiperConfigurations
  *
  * @description
  * Default swiper configurations provider.

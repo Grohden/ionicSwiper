@@ -3,7 +3,7 @@ import {directiveName as containerName} from './swiper.container.directive';
 export const directiveName = 'swiperRequireFocus';
 /**
  * @ngdoc directive
- * @name ionic.swiper#SwiperRequireFocusDirective
+ * @name SwiperRequireFocus
  * @requires $timeout
  *
  * @description

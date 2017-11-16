@@ -8,7 +8,7 @@ export const serviceName = 'SwiperSelectionService';
 
 /**
  * @ngdoc service
- * @name ionic.swiper:SwiperSelectionService
+ * @name SwiperSelectionService
  * @requires $rootScope
  * @requires SwiperService
  *

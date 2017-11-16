@@ -5,7 +5,7 @@ export const directiveName = 'swiperSlide';
 
 /**
  * @ngdoc directive
- * @name ionic.swiper#SwiperSlideDirective
+ * @name SwiperSlide
  *
  * @description
  * This directive asks the controller to create swiper slides.

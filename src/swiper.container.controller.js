@@ -11,7 +11,7 @@ export const controllerAsName = 'spcCtrl';
 
 /**
  * @ngdoc controller
- * @name ionic.swiper:SwiperContainerController
+ * @name SwiperContainerController
  * @alias tskCtrl
  *
  * @description

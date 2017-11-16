@@ -5,7 +5,7 @@ import {
 
 /**
  * @ngdoc directive
- * @name ionic.swiper#SwiperContainerDirective
+ * @name SwiperContainer
  * @description
  * An wrapper directive for swiper container
  *

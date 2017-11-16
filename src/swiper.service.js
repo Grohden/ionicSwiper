@@ -8,7 +8,7 @@ export const serviceName = 'SwiperService';
 
 /**
  * @ngdoc service
- * @name ionic.swiper:SwiperService
+ * @name SwiperService
  *
  * @description
  * Swiper instances management service

@@ -11,7 +11,7 @@
     "test": "karma start",
     "build": "(webpack -p --progress)",
     "watch": "webpack --watch",
-    "start": "webpack-dev-server --open",
+    "start": "browser-sync start --files demo --server demo --index index.html",
     "prepack": "npm run build"
   },
   "keywords": [
@@ -30,6 +30,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.18.13",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "jasmine": "^2.8.0",
@@ -41,6 +42,6 @@
   },
   "dependencies": {
     "ramda": "^0.25.0",
-    "swiper": "^4.0.5"
+    "swiper": "^4.0.6"
   }
 }
