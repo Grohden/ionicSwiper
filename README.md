@@ -2,7 +2,7 @@
 
 If you're looking for an angular wrapper for swiper you can find it [here](https://github.com/ksachdeva/angular-swiper).
 
-My version of angular swiper is focused on **ionic v1**, since ionic v1 lists does'nt support swipes for both sides i wrote this
+My version of angular swiper is focused on **ionic v1**, since ionic v1 lists doesn't support swipes for both sides i wrote this
 'simple' wrappers for Swiper (which seems to be the one used in ionic 2)
 to support this.
 
