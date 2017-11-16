@@ -1,9 +1,9 @@
-import {complement, cond, equals, forEach, ifElse, isNil, pipe, T, unless} from 'ramda'
-import {findForContainerId, findIndexForContainerId, isFinalIndex, isFirstIndex, toInstances} from "./functional.core";
+import {complement, cond, equals, forEach, ifElse, isNil, pipe, T, unless, path} from 'ramda'
+import {findForContainerId, findIndexForContainerId, isFinalIndex, toInstances} from "./functional.core";
 import {SWIPER_DESTROY_EVENT} from "./swiper.events";
 
 const clearAllControllers = pipe(toInstances,forEach( i => i.controller.control = []));
-
+const isDestroyed = path(['instance','destroyed']);
 export const serviceName = 'SwiperSelectionService';
 
 /**
@@ -48,7 +48,7 @@ export /* @ngInject */  function SwiperSelectionService($rootScope, SwiperServic
         pipe(
             findIndexForContainerId(containerId),
             unless(equals(-1), index => {
-                selectedList[index].instance.controller.control = [];
+                unless(isDestroyed, w => w.instance.controller.control = [])(selectedList[index]);
                 selectedList.splice(index, 1);
                 createControllersAsCircularLinkedList(selectedList);
             })
@@ -76,7 +76,7 @@ export /* @ngInject */  function SwiperSelectionService($rootScope, SwiperServic
 
                 cond([
                     [isFinalIndex(array), putUnderInstanceControl(-1)],
-                    [isFirstIndex(array), putUnderInstanceControl(1)],
+                    [equals(0), putUnderInstanceControl(1)],
                     [T, i => {
                         const added = [array[i - 1], array[i + 1]];
                         return (instance.controller.control = added);

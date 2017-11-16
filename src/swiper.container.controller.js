@@ -1,10 +1,7 @@
 import {directiveName} from "./swiper.container.directive";
 import {SWIPER_DESTROY_EVENT} from "./swiper.events";
-
-const unless = require('ramda/src/unless');
-const equals = require('ramda/src/equals');
-const findIndex = require('ramda/src/findIndex');
-const eqPointer = (f) => (s) => f === s;
+import {equals, findIndex, pipe, prop, unless} from 'ramda';
+import {eqPointer} from "./functional.core";
 
 export const controllerName = 'SwiperContainerController';
 export const controllerAsName = 'spcCtrl';
@@ -13,11 +10,15 @@ export const controllerAsName = 'spcCtrl';
  * @ngdoc controller
  * @name SwiperContainerController
  * @alias tskCtrl
+ * @requires $rootScope
+ * @requires $element
+ * @requires $scope
+ * @requires $attrs
+ * @requires SwiperService
  *
  * @description
  * Swiper container controller that exposes some functions
  *
- * @require $element
  *
  **/
 export /* @ngInject */ function SwiperContainerController($rootScope, $element, $scope, $attrs, SwiperService) {
@@ -55,9 +56,11 @@ export /* @ngInject */ function SwiperContainerController($rootScope, $element, 
     };
 
     _self.slideToElement = function($element) {
-        const index = findIndex(eqPointer($element))(swiperInstance.slides);
-
-        unless(equals(-1), swiperInstance.slideTo(index));
+        pipe(
+            prop('slides'),
+            findIndex(eqPointer($element)),
+            unless(equals(-1), swiperInstance.slideTo)
+        )(swiperInstance);
         return _self;
     }
 }
