@@ -15,27 +15,15 @@ export const directiveName = 'swiperSlide';
  */
 export /* @ngInject */ function SwiperSlideDirective(SwiperConfigurations) {
     'use strict';
-    const slideClass = SwiperConfigurations.slideClass;
-    const noSwipingClass = SwiperConfigurations.noSwipingClass;
-
     return {
         restrict: 'A',
         require:`^^${containerName}`,
-
-        /**
-         * @param {$rootScope.Scope} $scope
-         * @param {$element} $element
-         * @param {$attr} $attr
-         * @param {SwiperContainerController} $ctrl
-         * */
         link: function ($scope, $element, $attr, $ctrl) {
             const swiperItem = $attr[directiveName] || 'center';
             const slideAdder = $ctrl.addSlide($element);
 
-            $attr.$addClass(slideClass);
-
             $scope.$on(SWIPER_CONTAINER_STATE_UPDATE, (event, enableSwiper) => {
-                if(swiperItem === 'center'){
+                if(!enableSwiper && swiperItem === 'center'){
                     $ctrl.slideToElement($element[0]);
                 }
             });

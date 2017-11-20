@@ -1,8 +1,7 @@
-import { directiveName } from './swiper.container.directive';
-import { SWIPER_CONTAINER_STATE_UPDATE, SWIPER_DESTROY_EVENT } from './swiper.events';
-import { equals, findIndex, pipe, prop, unless } from 'ramda';
-import { eqPointer } from './functional.core';
-import { SwiperConfigurationsProvider } from './swiper.configs.provider';
+import {directiveName} from './swiper.container.directive';
+import {SWIPER_CONTAINER_STATE_UPDATE, SWIPER_DESTROY_EVENT} from './swiper.events';
+import {equals, prop, unless} from 'ramda';
+import {eqPointer} from './functional.core';
 
 export const controllerName = 'SwiperContainerController';
 export const controllerAsName = 'spcCtrl';
@@ -50,11 +49,9 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
         return {
             toLeft: () => swiperPromise.then(swiper => {
                 swiper.prependSlide(slideElement);
-                swiper.slideNext(0);
             }),
             toRight: () => swiperPromise.then(swiper => {
                 swiper.appendSlide(slideElement);
-                swiper.slidePrev(0);
             }),
             toCenter: () => swiperPromise.then(swiper => {
                 swiper.appendSlide(slideElement);

@@ -1,58 +1,69 @@
 <html ng-app="ionicApp">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>Ionic List Directive</title>
 
-        <link type="text/css" rel="stylesheet prefetch" href="https://code.ionicframework.com/nightly/css/ionic.min.css">
-        <link type="text/css" rel="stylesheet prefetch" href="demo.css"/>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Ionic List Directive</title>
 
-        <script type="text/javascript" src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
-        <script type="text/javascript" src="./demo.bundle.js"></script>
-    </head>
+    <link type="text/css" rel="stylesheet prefetch" href="https://code.ionicframework.com/nightly/css/ionic.min.css">
+    <link type="text/css" rel="stylesheet prefetch" href="demo.css" />
 
-    <body ng-controller="AppController as ctrl" ng-strict-di>
+    <script type="text/javascript" src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+    <script type="text/javascript" src="./demo.bundle.js"></script>
+</head>
 
-        <ion-header-bar class="bar-positive">
-            <h1 class="title">Ionic V1 list with both side swipes</h1>
-        </ion-header-bar>
+<body ng-controller="AppController as ctrl" ng-strict-di>
 
-        <ion-content>
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Ionic V1 list with both side swipes</h1>
+    </ion-header-bar>
 
-            <div class="card">
-                <div class="item item-text-wrap">
-                    A simple list using ionic v1 list combined with ionic swiper.
-                    <br>
-                    <strong>This example is for a mobile context, so if you are in a browser, you should
-                        emulate an device to get a better experience.
-                    </strong>
+    <ion-content>
+        <!-- Refresh -->
+        <ion-refresher 
+            pulling-text="Pull to update"
+            pulling-icon="none" 
+            on-refresh="ctrl.reload()">
+        </ion-refresher>
+
+        <div class="card">
+            <div class="item item-text-wrap">
+                A simple list using ionic v1 list combined with ionic swiper.
+                <br>
+                <strong>This example is for a mobile context, so if you are in a browser, you should emulate an device to get a better
+                    experience.
+                </strong>
+            </div>
+        </div>
+
+        <ion-list>
+            <div class="swiper-container"
+                 ng-init="selectHolder = {isEnabled: true};"
+                 swiper-container="{{ selectHolder.isEnabled }}"
+                 ng-repeat="item in ctrl.items">
+                <div class="swiper-wrapper" ng-class="{'selected': selectHolder.isSelected}">
+
+                    <ion-item class="central-item swiper-slide" swiper-slide="center" on-hold="ctrl.handleHold(selectHolder, containerId);">
+                        Item {{:: item.id }} {{selectHolder.isSelected ? "is selected" : "isn't selected"}}
+
+                        <a class="button button-icon icon"
+                            ng-click="selectHolder.isEnabled = !selectHolder.isEnabled"
+                            ng-class="selectHolder.isEnabled ? 'ion-arrow-swap' : 'ion-minus'"
+                        ></a>
+                    </ion-item>
+                    
+                    <ion-item class="side-item swiper-slide" swiper-slide="left">
+                            Left
+                    </ion-item>
+                    
+                    <ion-item class="side-item swiper-slide" swiper-slide="right">
+                            Right
+                    </ion-item>
                 </div>
             </div>
 
-            <ion-list>
-                <div class="swiper-container"
-                     ng-init="selectHolder = {};"
-                     swiper-container="{{ !selectHolder.isSelected }}"                     
-                     ng-repeat="item in ctrl.items">
-                    <div class="swiper-wrapper" ng-class="{'selected': selectHolder.isSelected}">
-                        <ion-item class="side-item" swiper-slide="left">
-                            Left
-                        </ion-item>
-                        
-                        <ion-item class="central-item"
-                                swiper-slide="center"
-                                on-hold="ctrl.handleHold(selectHolder, containerId);">
-                              Item {{:: item.id }} {{selectHolder.isSelected ? "is selected" : "isn't selected"}}
-                        </ion-item>
-
-                        <ion-item class="side-item" swiper-slide="right">
-                            Right
-                        </ion-item>
-
-                    </div>
-                </div>
-
-            </ion-list>
-        </ion-content>
+        </ion-list>
+    </ion-content>
 </body>
+
 </html>

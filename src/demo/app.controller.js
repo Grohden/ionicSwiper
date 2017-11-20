@@ -3,7 +3,7 @@ import map from 'ramda/src/map';
 import range from 'ramda/src/range';
 
 export const controllerName = 'AppController';
-export /* @ngInject */ function AppController (SwiperService, SwiperSelectionService){
+export /* @ngInject */ function AppController ($timeout, $scope, SwiperService, SwiperSelectionService){
     'use strict';
 
     const _self = this;
@@ -24,6 +24,15 @@ export /* @ngInject */ function AppController (SwiperService, SwiperSelectionSer
                 return selectHolder.isSelected;
             }
         )();
+    };
+
+    _self.reload = function(){
+        _self.items = [];
+
+        $timeout(()=>{
+            _self.items = map(x => ({id:x}), range(1,25));
+            $scope.$broadcast('scroll.refreshComplete');
+        }, 200);
     };
 
 
