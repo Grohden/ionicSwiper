@@ -1,6 +1,6 @@
-import {complement, cond, equals, forEach, ifElse, isNil, pipe, T, unless, path} from 'ramda'
-import {findForContainerId, findIndexForContainerId, isFinalIndex, toInstances} from "./functional.core";
-import {SWIPER_DESTROY_EVENT} from "./swiper.events";
+import {complement, cond, equals, forEach, ifElse, isNil, pipe, T, unless, path} from 'ramda';
+import {findForContainerId, findIndexForContainerId, isFinalIndex, toInstances} from './functional.core';
+import {SWIPER_DESTROY_EVENT} from './swiper.events';
 
 const clearAllControllers = pipe(toInstances,forEach( i => i.controller.control = []));
 const isDestroyed = path(['instance','destroyed']);
@@ -31,7 +31,7 @@ export /* @ngInject */  function SwiperSelectionService($rootScope, SwiperServic
 
     _self.clear = function() {
         clearAllControllers(selectedList);
-        return selectedList = [];
+        return (selectedList = []);
     };
 
     _self.putInSelection = function(containerId){
@@ -81,9 +81,9 @@ export /* @ngInject */  function SwiperSelectionService($rootScope, SwiperServic
                         const added = [array[i - 1], array[i + 1]];
                         return (instance.controller.control = added);
                     }]
-                ])(index)
+                ])(index);
             }
-        )
+        );
     }
 
 }

@@ -17,6 +17,7 @@ An demo is available [here](https://grohden.github.io/ionicSwiper/) and on the d
 ## Usage
 
 You just need to import the `swiper.bundle.js` in  the HTML like this:
+
 ```html
 <link type="text/css" href="swiper.css"/>
 <script type="text/javascript" src="swiper.bundle.js"></script>
@@ -25,8 +26,8 @@ You just need to import the `swiper.bundle.js` in  the HTML like this:
 </script>
 ```
 
-
 Or if you use **webpack** you can use like this:
+
 ```javascript
 import {moduleName as ionicSwiperModule} from 'ionic-swiper';
 
@@ -36,16 +37,19 @@ angular.module('yourModule',[ionicSwiperModule]);
 ```
 
 **You can import the module like that, but you'll need to use these two in your webpack:**
+
 * babel-plugin-angularjs-annotate
-*  extract-text-webpack-plugin
+* extract-text-webpack-plugin
 
 ### Provided interfaces
 
 #### Default configurations 
 
-You can **override** the default configurations for swiper with 
-`SwiperConfigurationsProvider` on the config phase 
+You can **override** the default configurations for swiper with
+
+`SwiperConfigurationsProvider` on the config phase
 like the shown on below:
+
 ```javascript
 config.$inject = ['SwiperConfigurationsProvider'];
 function config(SwiperConfigurationsProvider) {
@@ -60,31 +64,33 @@ function config(SwiperConfigurationsProvider) {
 
 The swiper service manages swiper instances, below is a list of exposed functions:
 
-| Exposed Function                                    	| Description                                                                                                                                                             	|
-|-----------------------------------------------------	|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| SwiperService.getInstances()                        	| returns all registered swiper instances.                                                                                                                                	|
-| SwiperService.getSwiperDefaultConfig(extend)        	| returns the default swiper configurations (including ones set in config phase)                                                                                          	|
-| SwiperService.isInMove()                            	| if the user is moving the swiper container (this is useful for make a on hold select using `onHold` ionic directive)                                                    	|
-| SwiperService.createInstance(containerId, $element) 	| creates a swiper instances using default configs and keeping track of the instance, you probably should not use this, it should only be used by the module controllers. 	|
+| Exposed Function                      | Return  | Description                                                                                                                                                             |
+|---------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| getInstances()                        | Array   | Returns all registered swiper instances.                                                                                                                                |
+| getSwiperDefaultConfig(extend)        | Object  | Returns the default swiper configurations (including ones set in config phase) extending the return object if *extend* param is provided                                |
+| isInMove()                            | Boolean | If the user is moving the swiper container (this is useful for make a on hold select using `onHold` ionic directive)                                                    |
+| hasInstances()                        | Boolean | If the service contains registered swiper instances                                                                                                                     |
+| createInstance(containerId, $element) | Promise | Creates a swiper instances using default configs and keeping track of the instance, you probably should not use this, it should only be used by the module controllers. |
 
 #### SwiperSelectionService
 
 The swiper selection service manages a **swipe synchronization between selection** of swiper containers.
 
-| Exposed Function                                         	| Description                                                                                                  	|
-|---------------------------------------------------------	|--------------------------------------------------------------------------------------------------------------	|
-| SwiperSelectionService.get()                            	| returns all the current selection synchronized swiper instances                                              	|
-| SwiperSelectionService.clear()                          	| removes all the selected instances controllers and clears the selected list                                  	|
-| SwiperSelectionService.putInSelection(containerId)      	| Put the id associated with swiper instance in the selection list and synchronizes the swipe                   |
-| SwiperSelectionService.removeFromSelection(containerId) 	| Removes the id associated with swiper instance from selection and remove swipe synchronization                |
-| SwiperSelectionService.toggleToSelection(containerId)   	| Uses internally `putInSelection` and `removeFromSelection`, checking if the provided id is in selection list 	|
+| Exposed Function                                         | Description                                                                                                  |
+|---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| SwiperSelectionService.get()                            | returns all the current selection synchronized swiper instances                                              |
+| SwiperSelectionService.clear()                          | removes all the selected instances controllers and clears the selected list                                  |
+| SwiperSelectionService.putInSelection(containerId)      | Put the id associated with swiper instance in the selection list and synchronizes the swipe                   |
+| SwiperSelectionService.removeFromSelection(containerId) | Removes the id associated with swiper instance from selection and remove swipe synchronization                |
+| SwiperSelectionService.toggleToSelection(containerId)   | Uses internally `putInSelection` and `removeFromSelection`, checking if the provided id is in selection list |
 
 #### Exposed properties in scope
 
 Most of the swiper management is done by using an id, this id is exposed by `swiperContainer` directive as `containerId`,
 an example:
+
 ```html
-<div 
+<div
     swiper-container="true"
     class="swiper-container" 
     ng-repeat="item in ctrl.items">
@@ -111,7 +117,6 @@ it works partially, but for some items swiper seems to get a 'free swipe mode'.
 
 There are some problems with ionic list scroll **on browser mode**, it seems that swiper take the 'drag'/scroll event to itself.
 
-
 ## Development
 
 `npm install` should setup everything to dev env.
@@ -122,7 +127,8 @@ then you can use the dist bundle.
 
 ## Notes
 
+* I'm not spending too much time in this lib, so, if you find a bug or have a sugestion, you can fork, open an issue or send a PR to me :D
+
 * I'm using **Ramda** to get a better functional approach.
 
 * **Swiper is a SLIDE lib**, so there are some limitations in this lib..
-

@@ -1,7 +1,17 @@
-import {equals, merge, pipe, unless} from 'ramda'
+import {
+    equals,
+    merge,
+    pipe,
+    unless
+} from 'ramda';
 import Swiper from 'swiper';
-import {findIndexForContainerId, findIsMoved} from "./functional.core";
-import {SWIPER_DESTROY_EVENT} from "./swiper.events";
+import {
+    findIndexForContainerId,
+    findIsMoved
+} from './functional.core';
+import {
+    SWIPER_DESTROY_EVENT
+} from './swiper.events';
 
 
 export const serviceName = 'SwiperService';
@@ -20,7 +30,7 @@ export /* @ngInject */ function SwiperService($rootScope, $q, $timeout, SwiperCo
     const swiperInstances = [];
     const configs = merge(SwiperConfigurations);
 
-    $rootScope.$on(SWIPER_DESTROY_EVENT, function(event, containerId){
+    $rootScope.$on(SWIPER_DESTROY_EVENT, function (event, containerId) {
         pipe(
             findIndexForContainerId(containerId),
             unless(equals(-1), index => {
@@ -30,8 +40,12 @@ export /* @ngInject */ function SwiperService($rootScope, $q, $timeout, SwiperCo
         )(swiperInstances);
     });
 
-    _self.getInstances = function(){
+    _self.getInstances = function () {
         return swiperInstances;
+    };
+
+    _self.hasInstances = function(){
+        return !!swiperInstances.length;
     };
 
     _self.getSwiperDefaultConfig = function (extend) {
@@ -45,10 +59,13 @@ export /* @ngInject */ function SwiperService($rootScope, $q, $timeout, SwiperCo
     _self.createInstance = function (containerId, $element) {
         const deferred = $q.defer();
 
-        $timeout(()=>{
+        $timeout(() => {
             const instance = new Swiper($element, _self.getSwiperDefaultConfig());
-            swiperInstances.push({containerId, instance});
-            deferred.resolve(instance);    
+            swiperInstances.push({
+                containerId,
+                instance
+            });
+            deferred.resolve(instance);
         });
 
         return deferred.promise;

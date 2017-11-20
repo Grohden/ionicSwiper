@@ -1,4 +1,4 @@
-import {add, curry, equals, find, findIndex, map, path, pipe, length, propEq} from 'ramda'
+import {add, curry, equals, find, findIndex, map, path, pipe, length, propEq} from 'ramda';
 
 /*
  * This file contains common functions that may be used in the project

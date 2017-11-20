@@ -1,0 +1,8 @@
+{
+  "esnext": true,
+  "quotmark":"single",
+  "globals":{
+    "angular":true
+  },
+  "laxbreak": true
+}

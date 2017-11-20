@@ -1,6 +1,6 @@
 import {directiveName as containerName} from './swiper.container.directive';
 import {cond, equals} from 'ramda';
-import {SWIPER_CONTAINER_STATE_UPDATE} from "./swiper.events";
+import {SWIPER_CONTAINER_STATE_UPDATE} from './swiper.events';
 
 export const directiveName = 'swiperSlide';
 
@@ -43,7 +43,7 @@ export /* @ngInject */ function SwiperSlideDirective(SwiperConfigurations) {
             cond([
                 [equals('left'), slideAdder.toLeft],
                 [equals('right'), slideAdder.toRight],
-                [equals('center'), slideAdder.toRight]
+                [equals('center'), slideAdder.toCenter]
             ])(swiperItem);
         }
     };

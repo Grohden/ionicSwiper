@@ -4,6 +4,6 @@ export /* @ngInject */ function config(SwiperConfigurationsProvider) {
 
     SwiperConfigurationsProvider.useAsDefaultConfigs({
         resistanceRatio: 0.3
-    })
+    });
 
 }

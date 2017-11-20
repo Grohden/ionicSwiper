@@ -9,11 +9,13 @@
   },
   "scripts": {
     "test": "karma start",
-    "build": "(webpack -p --progress)",
+    "lint": "jshint ./src/",
+    "build": "webpack -p --progress",
     "watch": "webpack --watch",
     "start": "browser-sync start --files demo --server demo --index index.html",
-    "prepack": "npm run build"
+    "prepack": "(npm run lint) && (npm run build)"
   },
+  "pre-commit": ["lint"],
   "keywords": [
     "ionic",
     "v1",
@@ -34,9 +36,11 @@
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "jasmine": "^2.8.0",
+    "jshint": "^2.9.5",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.0",
+    "pre-commit": "^1.2.2",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1"
   },
