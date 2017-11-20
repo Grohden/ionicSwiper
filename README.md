@@ -12,7 +12,7 @@ to support this.
 
 ## Demo
 
-An demo is available [here](https://grohden.github.io/ionicSwiper/) and on the demo folder
+An demo is available [here](https://grohden.github.io/ionicSwiper/) and on the demo folder.
 
 ## Usage
 
@@ -40,6 +40,45 @@ angular.module('yourModule',[ionicSwiperModule]);
 
 * babel-plugin-angularjs-annotate
 * extract-text-webpack-plugin
+
+
+### Usage example
+
+Below is a simple usage on html:
+
+```html
+<div
+    swiper-container="{{ true }}"
+    class="swiper-container" 
+    ng-repeat="item in ctrl.items">
+  <!-- containerId is available inside this context -->
+
+  <div class="swiper-wrapper">
+            <ion-item class="swiper-slide" swiper-slide="center">
+              This swiper container id is {{:: containerId }}
+            </ion-item>
+
+            <!--By the way, the html nodes order matters! -->
+            <ion-item class="swiper-slide" swiper-slide="left">
+                Left Button
+            </ion-item>
+
+            <ion-item class="swiper-slide" swiper-slide="right">
+                Right Button
+            </ion-item>
+    </div>
+</div>
+```
+
+Note: Most of the swiper management is done by using an id, this id is exposed by `swiperContainer` directive as `containerId` as shown in the example.
+
+### Directives
+
+| Directive            | Description                                                                                                                                                                             |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| swiper-container     | This directive exposes the containerId through scope, and creates the swiper instances using SwiperService It creates an watcher in itself to disable or enable swipe on the container. |
+| swiper-slide         | This directive can be used to 'reorder' the slides,  for now the best usage is to call it after the center with the 'left' param, avoiding the flickering                               |
+| swiper-require-focus | This one is an 'slide to me when ready', it slides with no animation.                                                                                                                   |
 
 ### Provided interfaces
 
@@ -84,32 +123,6 @@ The swiper selection service manages a **swipe synchronization between selection
 | SwiperSelectionService.removeFromSelection(containerId) | Removes the id associated with swiper instance from selection and remove swipe synchronization                |
 | SwiperSelectionService.toggleToSelection(containerId)   | Uses internally `putInSelection` and `removeFromSelection`, checking if the provided id is in selection list |
 
-#### Exposed properties in scope
-
-Most of the swiper management is done by using an id, this id is exposed by `swiperContainer` directive as `containerId`,
-an example:
-
-```html
-<div
-    swiper-container="true"
-    class="swiper-container" 
-    ng-repeat="item in ctrl.items">
-  <!-- containerId is available inside this context -->
-
-  <div class="swiper-wrapper">
-            <ion-item swiper-slide="center">
-              This swiper container id is {{:: containerId }}
-            </ion-item>
-            <ion-item swiper-slide="right">
-                Right Button
-            </ion-item>
-            <ion-item swiper-slide="left">
-                Left Button
-            </ion-item>
-    </div>
-</div>
-```
-
 ## Issues
 
 My implementation seems to not work properly with ionic's `collection-repeat`,
@@ -127,7 +140,10 @@ then you can use the dist bundle.
 
 ## Notes
 
-* I'm not spending too much time in this lib, so, if you find a bug or have a sugestion, you can fork, open an issue or send a PR to me :D
+* I'm not spending too much time in this lib, so, if you find a bug or have a suggestion, you can fork, open an issue or send a PR to me :D
+
+* I did'nt wrote directives with templates to give a better control over html structure, so you need the
+*swiper-container*, *swiper-wrapper* and *swiper-slides* classes and nodes.
 
 * I'm using **Ramda** to get a better functional approach.
 
