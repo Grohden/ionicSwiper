@@ -13,7 +13,7 @@ export const serviceName = 'SwiperService';
  * @description
  * Swiper instances management service
  **/
-export /* @ngInject */ function SwiperService($rootScope, SwiperConfigurations) {
+export /* @ngInject */ function SwiperService($rootScope, $q, $timeout, SwiperConfigurations) {
     'use strict';
 
     const _self = this;
@@ -43,8 +43,14 @@ export /* @ngInject */ function SwiperService($rootScope, SwiperConfigurations) 
     };
 
     _self.createInstance = function (containerId, $element) {
-        const instance = new Swiper($element, _self.getSwiperDefaultConfig());
-        swiperInstances.push({containerId, instance});
-        return instance;
+        const deferred = $q.defer();
+
+        $timeout(()=>{
+            const instance = new Swiper($element, _self.getSwiperDefaultConfig());
+            swiperInstances.push({containerId, instance});
+            deferred.resolve(instance);    
+        });
+
+        return deferred.promise;
     };
 }

@@ -31,21 +31,24 @@
 
             <ion-list>
                 <div class="swiper-container"
-                     swiper-container="true"
                      ng-init="selectHolder = {};"
+                     swiper-container="{{ !selectHolder.isSelected }}"                     
                      ng-repeat="item in ctrl.items">
                     <div class="swiper-wrapper" ng-class="{'selected': selectHolder.isSelected}">
-                        <ion-item class="central-item"
-                                  swiper-slide="center"
-                                  on-hold="ctrl.handleHold(selectHolder, containerId);">
-                            Item {{:: item.id }} {{selectHolder.isSelected ? "is selected" : "isn't selected"}}
-                        </ion-item>
-                        <ion-item class="side-item" swiper-slide="right">
-                            Right
-                        </ion-item>
                         <ion-item class="side-item" swiper-slide="left">
                             Left
                         </ion-item>
+                        
+                        <ion-item class="central-item"
+                                swiper-slide="center"
+                                on-hold="ctrl.handleHold(selectHolder, containerId);">
+                              Item {{:: item.id }} {{selectHolder.isSelected ? "is selected" : "isn't selected"}}
+                        </ion-item>
+
+                        <ion-item class="side-item" swiper-slide="right">
+                            Right
+                        </ion-item>
+
                     </div>
                 </div>
 

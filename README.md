@@ -114,8 +114,8 @@ There are some problems with ionic list scroll **on browser mode**, it seems tha
 
 ## Development
 
-`yarn install` should setup everything to dev env.
-then you can run `npm start` and start the development
+`npm install` should setup everything to dev env.
+then you can run `npm start` and `npm run watch` and start the development
 
 To make the dist build, you should run `npm build`, if every test pass,
 then you can use the dist bundle.
