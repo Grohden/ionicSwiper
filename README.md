@@ -103,22 +103,22 @@ function config(SwiperConfigurationsProvider) {
 
 The swiper service manages swiper instances, below is a list of exposed functions:
 
-| Exposed Function                      | Return  | Description                                                                                                                                                             |
-|---------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| getInstances()                        | Array   | Returns all registered swiper instances.                                                                                                                                |
-| getSwiperDefaultConfig(extend)        | Object  | Returns the default swiper configurations (including ones set in config phase) extending the return object if *extend* param is provided                                |
-| isInMove()                            | Boolean | If the user is moving the swiper container (this is useful for make a on hold select using `onHold` ionic directive)                                                    |
-| hasInstances()                        | Boolean | If the service contains registered swiper instances                                                                                                                     |
-| createInstance(containerId, $element) | Promise | Creates a swiper instances using default configs and keeping track of the instance, you probably should not use this, it should only be used by the module controllers. |
+| Exposed Function                          | Return  | Description                                                                                                                                                             |
+|-------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| getInstances()                            | Array   | Returns all registered swiper instances.                                                                                                                                |
+| getSwiperDefaultConfig(extend)            | Object  | Returns the default swiper configurations (including ones set in config phase) extending the return object if *extend* param is provided                                |
+| isInMove()                                | Boolean | If the user is moving the swiper container (this is useful for make a on hold select using `onHold` ionic directive)                                                    |
+| hasInstances()                            | Boolean | If the service contains registered swiper instances                                                                                                                     |
+| createInstanceSync(containerId, $element) | Promise | Creates a swiper instances using default configs and keeping track of the instance, you probably should not use this, it should only be used by the module controllers. |
 
 #### SwiperSelectionService
 
 The swiper selection service manages a **swipe synchronization between selection** of swiper containers.
 
-| Exposed Function                                         | Description                                                                                                  |
+| Exposed Function                                        | Description                                                                                                  |
 |---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| SwiperSelectionService.get()                            | returns all the current selection synchronized swiper instances                                              |
-| SwiperSelectionService.clear()                          | removes all the selected instances controllers and clears the selected list                                  |
+| SwiperSelectionService.getSelection()                   | returns all the current selection synchronized swiper instances                                              |
+| SwiperSelectionService.clearSelection()                 | removes all the selected instances controllers and clears the selected list                                  |
 | SwiperSelectionService.putInSelection(containerId)      | Put the id associated with swiper instance in the selection list and synchronizes the swipe                   |
 | SwiperSelectionService.removeFromSelection(containerId) | Removes the id associated with swiper instance from selection and remove swipe synchronization                |
 | SwiperSelectionService.toggleToSelection(containerId)   | Uses internally `putInSelection` and `removeFromSelection`, checking if the provided id is in selection list |

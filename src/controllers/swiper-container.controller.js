@@ -28,7 +28,7 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
     'use strict';
 
     const _self = this;
-    const swiperPromise = SwiperService.createInstance($scope.$id, $element);
+    const swiperPromise = SwiperService.createInstanceAsync($scope.$id, $element);
 
     const noSwipingClass = SwiperConfigurations.noSwipingClass;
 

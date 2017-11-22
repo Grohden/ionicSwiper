@@ -2,6 +2,7 @@
 src/demo/
 demo/
 test/
+docs/
 .jshintrc
 gulpfile.babel.js
 karma.conf.js
