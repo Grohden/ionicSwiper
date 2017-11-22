@@ -20,6 +20,12 @@ import SwiperDefaultStyles from 'swiper/dist/css/swiper.min.css';
 
 export const moduleName = 'ionic.swiper';
 
+/**
+ * @ngdoc overview
+ * @name ionic.swiper
+ * @description This module was created to add swipe to both sides in ionic v1
+ *
+ */
 angular
     .module(moduleName, [])
     .provider   (providerName,           SwiperConfigurationsProvider)

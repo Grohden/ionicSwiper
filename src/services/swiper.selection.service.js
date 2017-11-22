@@ -14,7 +14,7 @@ export const serviceName = 'SwiperSelectionService';
  * The swiper selection service manages a **swipe synchronization between selection** of swiper containers.
  *
  * @requires $rootScope
- * @requires SwiperService
+ * @requires ionic.swiper.SwiperService
  */
 export /* @ngInject */  function SwiperSelectionService($rootScope, SwiperService) {
     'use strict';

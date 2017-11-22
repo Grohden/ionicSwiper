@@ -26,7 +26,7 @@ export const serviceName = 'SwiperService';
  * @requires $rootScope
  * @requires $q
  * @requires $timeout
- * @requires SwiperConfigurationsProvider
+ * @requires ionic.swiper.SwiperConfigurationsProvider
  */
 export /* @ngInject */ function SwiperService($rootScope, $q, $timeout, SwiperConfigurations) {
     'use strict';

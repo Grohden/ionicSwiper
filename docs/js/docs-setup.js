@@ -5,6 +5,15 @@ NG_DOCS={
   "pages": [
     {
       "section": "api",
+      "id": "ionic.swiper",
+      "shortName": "ionic.swiper",
+      "type": "overview",
+      "moduleName": "ionic.swiper",
+      "shortDescription": "This module was created to add swipe to both sides in ionic v1",
+      "keywords": "add api created ionic module overview sides swipe swiper v1"
+    },
+    {
+      "section": "api",
       "id": "ionic.swiper.controller:SwiperContainerController",
       "shortName": "SwiperContainerController",
       "type": "controller",
