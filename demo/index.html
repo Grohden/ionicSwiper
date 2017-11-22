@@ -39,7 +39,7 @@
         <ion-list ng-if="true">
             <ionic-swiper ng-repeat="item in ctrl.items"
                           ng-init="selectHolder = {isEnabled: true};"
-                          left-swiper="false"
+                          left-swiper="true"
                           right-swiper="true"
                           on-hold="ctrl.handleHold(selectHolder, containerId);">
                 <left-swiper class="side-item">
