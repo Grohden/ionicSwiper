@@ -2,6 +2,8 @@
 src/demo/
 demo/
 test/
+.jshintrc
+gulpfile.babel.js
 karma.conf.js
 webpack.config.js
 yarn.lock

@@ -26,6 +26,15 @@ export /* @ngInject */ function AppController ($timeout, $scope, SwiperService, 
         )();
     };
 
+    _self.randomIf = function (id) {
+        if(_self.randomIf[id]){
+            return _self.randomIf[id];
+        } else {
+            const rand = Math.random() * 10 > 5;
+            return (_self.randomIf[id] = rand);
+        }
+    };
+
     _self.reload = function(){
         _self.items = [];
 

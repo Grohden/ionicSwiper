@@ -23,6 +23,10 @@ body {
     padding-left: 55px;
 }
 
+.swiper-container .central-item.remove-pad {
+    padding-left: 0px;
+}
+
 .swiper-container .side-item {
     max-width: 40%;
     background-color: #2C8DFB;

@@ -36,7 +36,30 @@
             </div>
         </div>
 
-        <ion-list>
+        <ion-list ng-if="true">
+            <ionic-swiper ng-repeat="item in ctrl.items"
+                          ng-init="selectHolder = {isEnabled: true};"
+                          left-swiper="false"
+                          right-swiper="true"
+                          on-hold="ctrl.handleHold(selectHolder, containerId);">
+                <left-swiper class="side-item">
+                    Left
+                </left-swiper>
+                <central-swiper class="central-item">
+                    Item {{:: item.id }} {{selectHolder.isSelected ? "is selected" : "isn't selected"}}
+
+                    <a class="button button-icon icon"
+                       ng-click="selectHolder.isEnabled = !selectHolder.isEnabled"
+                       ng-class="selectHolder.isEnabled ? 'ion-arrow-swap' : 'ion-minus'"
+                    ></a>
+                </central-swiper>
+                <right-swiper class="side-item">
+                    Right
+                </right-swiper>
+            </ionic-swiper>
+        </ion-list>
+
+        <ion-list ng-if="false">
             <div class="swiper-container"
                  ng-init="selectHolder = {isEnabled: true};"
                  swiper-container="{{ selectHolder.isEnabled }}"

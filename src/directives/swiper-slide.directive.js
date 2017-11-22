@@ -1,19 +1,19 @@
-import {directiveName as containerName} from './swiper.container.directive';
+import {directiveName as containerName} from './swiper-container.directive';
 import {cond, equals} from 'ramda';
-import {SWIPER_CONTAINER_STATE_UPDATE} from './swiper.events';
+import {SWIPER_CONTAINER_STATE_UPDATE} from '../swiper.events';
 
 export const directiveName = 'swiperSlide';
 
 /**
  * @ngdoc directive
- * @name SwiperSlide
+ * @name ionic.swiper.directive:swiperSlide
+ * @restrict 'A'
  *
  * @description
  * This directive asks the controller to create swiper slides.
  *
- * @param {SwiperConfigurations} SwiperConfigurations
  */
-export /* @ngInject */ function SwiperSlideDirective(SwiperConfigurations) {
+export /* @ngInject */ function SwiperSlideDirective() {
     'use strict';
     return {
         restrict: 'A',

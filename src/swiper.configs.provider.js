@@ -1,14 +1,7 @@
 
 export const providerName = 'SwiperConfigurations';
 
-/**
- * @ngdoc provider
- * @name SwiperConfigurations
- *
- * @description
- * Default swiper configurations provider.
- *
- */
+
 export /* @ngInject */ function SwiperConfigurationsProvider() {
     'use strict';
 
