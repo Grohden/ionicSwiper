@@ -44,7 +44,32 @@ angular.module('yourModule',[ionicSwiperModule]);
 
 ### Usage example
 
-Below is a simple usage on html:
+Below is the latest way to use this lib:
+
+```html
+<ionic-swiper ng-repeat="i in [1,2,3]"
+              left-swiper="{{:: true || 'or any prop that evaluate to a boolean' }}"
+              right-swiper="{{:: true || 'or any prop that evaluate to a boolean' }}">
+    <!-- containerId is available inside this context -->
+            
+    <!-- Left transclude is optional -->
+    <left-swiper class="side-item">
+        Left
+    </left-swiper>
+    
+    <!-- Central transclude is required -->
+    <central-swiper class="central-item">
+       Central {{:: containerId}}
+    </central-swiper>
+    
+    <!-- Right transclude is optional -->
+    <right-swiper class="side-item">
+        Right
+    </right-swiper>
+</ionic-swiper>
+```
+
+Below is a simple usage on html **with the old way** i wrote this:
 
 ```html
 <div
@@ -73,6 +98,8 @@ Below is a simple usage on html:
 Note: Most of the swiper management is done by using an id, this id is exposed by `swiperContainer` directive as `containerId` as shown in the example.
 
 ### Directives
+
+Old directives:
 
 | Directive            | Description                                                                                                                                                                             |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -11,6 +11,7 @@ export const controllerAsName = 'spcCtrl';
  * @ngdoc controller
  * @name ionic.swiper.controller:SwiperContainerController
  * @alias spcCtrl
+ *
  * @description
  * Swiper container controller that exposes some functions to swiperContainer directive and
  * its children
@@ -21,8 +22,8 @@ export const controllerAsName = 'spcCtrl';
  * @requires $scope
  * @requires $attrs
  * @requires $timeout
- * @requires SwiperService
- * @requires SwiperConfigurationsProvider
+ * @requires ionic.swiper.SwiperService
+ * @requires ionic.swiper.SwiperConfigurationsProvider
  */
 export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $element, $scope, $attrs, $timeout, SwiperService, SwiperConfigurations) {
     'use strict';
@@ -35,6 +36,18 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
     //exposes scope id as container id
     $scope.containerId = $scope.$id;
 
+    /**
+     * @ngdoc method
+     * @name ionic.swiper.controller:SwiperContainerController#addSlide
+     * @methodOf ionic.swiper.controller:SwiperContainerController
+     *
+     * @param {HTMLElement} slideElement swiper container
+     *
+     * @description
+     * Returns an swiper instance adder
+     *
+     * @return {Function} toLeft,toRight,toCenter functions to add the element
+     */
     _self.addSlide = function (slideElement) {
         return {
             toLeft: () => swiperPromise.then(swiper => {
@@ -49,11 +62,32 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
         };
     };
 
+    /**
+     * @ngdoc method
+     * @name ionic.swiper.controller:SwiperContainerController#callUpdate
+     * @methodOf ionic.swiper.controller:SwiperContainerController
+     *
+     * @description
+     * Calls swiper update function
+     *
+     * @return {spcCtrl} instance for chain calls
+     */
     _self.callUpdate = function () {
         swiperPromise.then(swiper => swiper.update());
         return _self;
     };
 
+    /**
+     * @ngdoc method
+     * @name ionic.swiper.controller:SwiperContainerController#slideToElement
+     * @methodOf ionic.swiper.controller:SwiperContainerController
+     *
+     * @param {HTMLElement} $element element to find index in slides
+     * @description
+     * Calls swiper slideTo method with zero delay
+     *
+     * @return {spcCtrl} instance for chain calls
+     */
     _self.slideToElement = function ($element) {
         swiperPromise.then(swiper => {
             const index = Array.prototype.findIndex.call(

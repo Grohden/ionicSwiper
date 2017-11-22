@@ -1,7 +1,13 @@
 
 export const providerName = 'SwiperConfigurations';
 
-
+/**
+ * @ngdoc service
+ * @name ionic.swiper.SwiperConfigurationsProvider
+ *
+ * @description
+ * Swiper default configs provider
+ */
 export /* @ngInject */ function SwiperConfigurationsProvider() {
     'use strict';
 
@@ -21,6 +27,16 @@ export /* @ngInject */ function SwiperConfigurationsProvider() {
         },
     };
 
+    /**
+     * @ngdoc method
+     * @name ionic.swiper.SwiperConfigurationsProvider#useAsDefaultConfigs
+     * @methodOf ionic.swiper.SwiperConfigurationsProvider
+     *
+     * @param {Object} configurations swiper configurations object to extend defaults
+     *
+     * @description
+     * Extends the default configurations for swiper to be used by ionic.swiper module
+     */
     _self.useAsDefaultConfigs = function(configurations){
         defaultConfigurations = angular.extend(defaultConfigurations, configurations);
     };

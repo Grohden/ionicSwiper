@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const gulpDocs = require('gulp-ngdocs');
 
 function generateNGDocs() {
     const gulpDocs = require('gulp-ngdocs');
@@ -21,6 +20,5 @@ function connectDocs() {
 }
 
 
-gulp.task('connect:docs', connectDocs);
-
-gulp.task('docs', generateNGDocs);
+gulp.task('docs:serve', connectDocs);
+gulp.task('docs:generate', generateNGDocs);
