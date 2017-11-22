@@ -1,6 +1,6 @@
 {
   "name": "ionic-swiper",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "An angular wrapper for swiper focused on ionic v1 as an 'swipe' lib (not slide)",
   "main": "src/swiper.module.js",
   "repository": {
