@@ -10,6 +10,7 @@
   "scripts": {
     "test": "karma start",
     "lint": "jshint ./src/",
+    "docs": "gulp docs:generate",
     "build": "webpack -p --progress",
     "watch": "webpack --watch",
     "start": "browser-sync start --files demo --server demo --index index.html",

@@ -14,6 +14,7 @@ export /* @ngInject */ function SwiperConfigurationsProvider() {
     const _self = this;
     let defaultConfigurations = {
         slideClass: 'swiper-slide',
+        wrapperClass: 'swiper-wrapper',
         noSwipingClass: 'swiper-no-swiping',
 
         slidesPerView: 'auto',

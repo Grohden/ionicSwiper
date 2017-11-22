@@ -32,6 +32,7 @@ export /* @ngInject */ function SwiperService($rootScope, $q, $timeout, SwiperCo
     'use strict';
 
     const _self = this;
+    //Todo: change this to object, and use containerId as key
     const swiperInstances = [];
     const configs = merge(SwiperConfigurations);
 

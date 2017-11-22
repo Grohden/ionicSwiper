@@ -28,7 +28,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "ionic.swiper",
       "shortDescription": "An alternative for swiperContainer using transclude but limited to 3 slides",
-      "keywords": "alternative api ctrl demo directive html ionic ionicswiper limited module ng-controller slides swiper swipercontainer text transclude"
+      "keywords": "$parse $rootscope alternative api center-on-disable central configs container containers create creates ctrl custom default defaults demo directive disabled eval false fullfiled html ionic ionicswiper is-swipable left-swiper limited module ng-controller no-swipe-class options properties provided provider right-swiper set slide slides slots swipable swiper swiperconfigurationsprovider swipercontainer swiperservice text transclude true updates validate watcher watchers"
     },
     {
       "section": "api",

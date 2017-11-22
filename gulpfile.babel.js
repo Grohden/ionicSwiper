@@ -19,6 +19,5 @@ function connectDocs() {
     });
 }
 
-
 gulp.task('docs:serve', connectDocs);
 gulp.task('docs:generate', generateNGDocs);
