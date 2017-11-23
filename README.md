@@ -14,7 +14,7 @@ to support this.
 
 An demo is available [here](https://codepen.io/Grohden/full/EbjWBe/) and on the demo folder.
 
-### API Documentation
+## API Documentation
 
 API Documentation is available [here](https://grohden.github.io/ionicSwiper/)
 
