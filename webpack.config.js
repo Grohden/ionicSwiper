@@ -55,7 +55,7 @@ module.exports = {
                 return getPath('[name].css').replace('css/js', 'css');
             },
             allChunks: true
-        }),
+        })
         //new webpack.NamedModulesPlugin(),
         //new webpack.HotModuleReplacementPLugin()
     ]

@@ -67,16 +67,14 @@ export /* @ngInject */ function IonicSwiperDirective($rootScope, $parse, SwiperS
             slots[rightSwipeDirective] = `?${rightSwipeDirective}`;
             return slots;
         }()),
-        template: function () {
-            //@formatter:off
-            return [
-                '<div class="swiper-container">',
-                    `<div class="${wrapperClass}">`,
-                    '</div>',
-                '</div>'
-            ].join('');
-            //@formatter:on
-        },
+        //@formatter:off
+        template: [
+            '<div class="swiper-container">',
+                `<div class="${wrapperClass}">`,
+                '</div>',
+            '</div>'
+        ].join(''),
+        //@formatter:on
         link: function ($scope, $element, $attrs, ctrl, transclude) {
             const ifNilTrueElseEval = ifElse(
                 isNil,

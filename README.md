@@ -12,7 +12,11 @@ to support this.
 
 ## Demo
 
-An demo is available [here](https://grohden.github.io/ionicSwiper/) and on the demo folder.
+An demo is available [here](https://codepen.io/Grohden/full/EbjWBe/) and on the demo folder.
+
+### API Documentation
+
+API Documentation is available [here](https://grohden.github.io/ionicSwiper/)
 
 ## Usage
 
@@ -41,13 +45,14 @@ angular.module('yourModule',[ionicSwiperModule]);
 * babel-plugin-angularjs-annotate
 * extract-text-webpack-plugin
 
-
 ### Usage example
 
 Below is the latest way to use this lib:
 
 ```html
 <ionic-swiper ng-repeat="i in [1,2,3]"
+              center-on-disable="{{ true || 'disable default center on disable behavior'}}"
+              is-swipable="{{ true || 'some prop to watch' }}"
               left-swiper="{{:: true || 'or any prop that evaluate to a boolean' }}"
               right-swiper="{{:: true || 'or any prop that evaluate to a boolean' }}">
     <!-- containerId is available inside this context -->
@@ -97,18 +102,6 @@ Below is a simple usage on html **with the old way** i wrote this:
 
 Note: Most of the swiper management is done by using an id, this id is exposed by `swiperContainer` directive as `containerId` as shown in the example.
 
-### Directives
-
-Old directives:
-
-| Directive            | Description                                                                                                                                                                             |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| swiper-container     | This directive exposes the containerId through scope, and creates the swiper instances using SwiperService It creates an watcher in itself to disable or enable swipe on the container. |
-| swiper-slide         | This directive can be used to 'reorder' the slides,  for now the best usage is to call it after the center with the 'left' param, avoiding the flickering                               |
-| swiper-require-focus | This one is an 'slide to me when ready', it slides with no animation.                                                                                                                   |
-
-### Provided interfaces
-
 #### Default configurations 
 
 You can **override** the default configurations for swiper with
@@ -125,30 +118,6 @@ function config(SwiperConfigurationsProvider) {
     })
 }
 ```
-
-#### SwiperService
-
-The swiper service manages swiper instances, below is a list of exposed functions:
-
-| Exposed Function                          | Return  | Description                                                                                                                                                             |
-|-------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| getInstances()                            | Array   | Returns all registered swiper instances.                                                                                                                                |
-| getSwiperDefaultConfig(extend)            | Object  | Returns the default swiper configurations (including ones set in config phase) extending the return object if *extend* param is provided                                |
-| isInMove()                                | Boolean | If the user is moving the swiper container (this is useful for make a on hold select using `onHold` ionic directive)                                                    |
-| hasInstances()                            | Boolean | If the service contains registered swiper instances                                                                                                                     |
-| createInstanceSync(containerId, $element) | Promise | Creates a swiper instances using default configs and keeping track of the instance, you probably should not use this, it should only be used by the module controllers. |
-
-#### SwiperSelectionService
-
-The swiper selection service manages a **swipe synchronization between selection** of swiper containers.
-
-| Exposed Function                                        | Description                                                                                                  |
-|---------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| SwiperSelectionService.getSelection()                   | returns all the current selection synchronized swiper instances                                              |
-| SwiperSelectionService.clearSelection()                 | removes all the selected instances controllers and clears the selected list                                  |
-| SwiperSelectionService.putInSelection(containerId)      | Put the id associated with swiper instance in the selection list and synchronizes the swipe                   |
-| SwiperSelectionService.removeFromSelection(containerId) | Removes the id associated with swiper instance from selection and remove swipe synchronization                |
-| SwiperSelectionService.toggleToSelection(containerId)   | Uses internally `putInSelection` and `removeFromSelection`, checking if the provided id is in selection list |
 
 ## Issues
 
