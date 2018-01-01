@@ -1,5 +1,5 @@
 import {SWIPER_DESTROY_EVENT} from '../swiper.events';
-import {__, curryN, ifElse, isNil, prop, T} from 'ramda';
+import * as R from 'ramda';
 import {centralSwipeDirective, leftSwipeDirective, rightSwipeDirective} from './ionic-swiper.slides.directives';
 
 export const directiveName = 'ionicSwiper';
@@ -21,7 +21,7 @@ export const directiveName = 'ionicSwiper';
  *
  * <strong>is-swipable</strong> creates an watcher and updates swiper container with
  * no-swipe-class of swiper (or the custom set in swiper configs provider)
-
+ *
  * <strong>center-on-disable</strong> if the directive should slide to
  * central slide when swiper is disabled. This one defaults to true and does not create watcher.
  *
@@ -31,101 +31,101 @@ export const directiveName = 'ionicSwiper';
  * @requires ionic.swiper.SwiperConfigurationsProvider
  *
  * @example
-     <example module="demo">
-         <file name="index.html">
-             <div ng-controller="Ctrl">
-                <ionic-swiper
-                     center-on-disable="false"
-                     is-swipable="true"
-                     left-swiper="true"
-                     right-swiper="true">
-
-                    <left-swiper>
-                        Some Text
-                    </left-swiper>
-                    <central-swiper>
-                        Some Text
-                    </central-swiper>
-                    <right-swiper>
-                        Some Text
-                    </right-swiper>
-                </ionic-swiper>
-             </div>
-         </file>
-     </example>
+ *   <example module="demo">
+ *       <file name="index.html">
+ *           <div ng-controller="Ctrl">
+ *              <ionic-swiper
+ *                   center-on-disable="false"
+ *                   is-swipable="true"
+ *                   left-swiper="true"
+ *                   right-swiper="true">
+ *
+ *                  <left-swiper>
+ *                      Some Text
+ *                  </left-swiper>
+ *                  <central-swiper>
+ *                      Some Text
+ *                  </central-swiper>
+ *                  <right-swiper>
+ *                      Some Text
+ *                  </right-swiper>
+ *              </ionic-swiper>
+ *           </div>
+ *       </file>
+ *   </example>
  */
 export /* @ngInject */ function IonicSwiperDirective($rootScope, $parse, SwiperService, SwiperConfigurations) {
-    const { noSwipingClass, wrapperClass} = SwiperConfigurations;
+    const {noSwipingClass, wrapperClass} = SwiperConfigurations;
 
     return {
         restrict: 'E',
         replace: true,
         transclude: (function () {
             const slots = {};
+
             slots[leftSwipeDirective] = `?${leftSwipeDirective}`;
             slots[centralSwipeDirective] = centralSwipeDirective;
             slots[rightSwipeDirective] = `?${rightSwipeDirective}`;
+
             return slots;
         }()),
-        //@formatter:off
-        template: [
-            '<div class="swiper-container">',
-                `<div class="${wrapperClass}">`,
-                '</div>',
-            '</div>'
-        ].join(''),
-        //@formatter:on
+        template: `
+            <div class="swiper-container">
+                <div class="${wrapperClass}">
+                </div>
+            </div>
+        `,
+        // eslint-disable-next-line max-params,object-shorthand
         link: function ($scope, $element, $attrs, ctrl, transclude) {
-            const ifNilTrueElseEval = ifElse(
-                isNil,
-                T,
-                prop => $scope.$eval(prop)
+            const getAttribute = R.prop(R.__, $attrs);
+
+            const isNilOrEvaluateToTrue = R.pipe(
+                getAttribute,
+                R.ifElse(
+                    R.isNil,
+                    R.T,
+                    R.unary($scope.$eval)
+                ),
+                R.always
             );
-            const attribute = prop(__, $attrs);
-            const isLeftValid = ifNilTrueElseEval(attribute(leftSwipeDirective));
-            const isRightValid = ifNilTrueElseEval(attribute(rightSwipeDirective));
-            const transcludeTemplate = curryN(3, transclude)(angular.noop, null);
 
+            const transcludeTemplate = R.curryN(3, transclude)(angular.noop, null);
+            const isAppendable = R.both(transclude.isSlotFilled, isNilOrEvaluateToTrue);
             const swiperWrapper = $element.contents(`.${wrapperClass}`);
-            let initial = 0;
+            const appendWhenValid = R.when(
+                isAppendable,
+                R.pipe(
+                    transcludeTemplate,
+                    element => {
+                        swiperWrapper.append(element);
+                    }
+                )
+            );
 
-            if (transclude.isSlotFilled(leftSwipeDirective) && isLeftValid) {
-                initial = 1;
-                swiperWrapper.append(
-                    transcludeTemplate(leftSwipeDirective)
-                );
-            }
+            const initialSlide = R.ifElse(isAppendable, R.always(1), R.always(0))(leftSwipeDirective);
 
-            if (transclude.isSlotFilled(centralSwipeDirective)) {
-                swiperWrapper.append(
-                    transcludeTemplate(centralSwipeDirective)
-                );
-            }
+            appendWhenValid(leftSwipeDirective);
+            appendWhenValid(centralSwipeDirective);
+            appendWhenValid(rightSwipeDirective);
 
-            if (transclude.isSlotFilled(rightSwipeDirective) && isRightValid) {
-                swiperWrapper.append(
-                    transcludeTemplate(rightSwipeDirective)
-                );
-            }
-
-            //Exposes containerId in scope
+            // Exposes containerId in scope
             $scope.containerId = $scope.$id;
 
-            const swiperInstance = SwiperService.createInstanceSync($scope.containerId, $element[0], {initialSlide: initial});
+            const swiperInstance = SwiperService.createInstance($scope.containerId, $element[0], {initialSlide});
 
-            $attrs.$observe('isSwipable', ifElse(
+            $attrs.$observe('isSwipable', R.ifElse(
                 interpolated => $parse(interpolated)(),
                 () => $attrs.$removeClass(noSwipingClass),
                 () => {
-                    if(ifNilTrueElseEval(attribute('centerOnDisable'))){
-                        swiperInstance.slideTo(initial, 0);
+                    if (isNilOrEvaluateToTrue('centerOnDisable')()) {
+                        swiperInstance.slideTo(initialSlide, 0);
                     }
 
                     $attrs.$addClass(noSwipingClass);
                 }
             ));
 
-            //Notify services
+            // Notify services
             $scope.$on('$destroy', () => {
                 $rootScope.$emit(SWIPER_DESTROY_EVENT, $scope.containerId);
             });

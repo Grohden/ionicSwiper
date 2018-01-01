@@ -4,6 +4,7 @@ import {
 } from '../controllers/swiper-container.controller';
 
 export const directiveName = 'swiperContainer';
+
 /**
  * @ngdoc directive
  * @name ionic.swiper.directive:swiperContainer

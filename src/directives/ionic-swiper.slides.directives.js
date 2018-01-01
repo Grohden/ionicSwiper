@@ -1,12 +1,13 @@
-const createSlideDirective = (SwiperConfigurations)=>{
-    const { slideClass } = SwiperConfigurations;
+function createSlideDirective(SwiperConfigurations) {
+    const {slideClass} = SwiperConfigurations;
+
     return {
-        restrict:'E',
+        restrict: 'E',
         template: `<ion-item class="${slideClass}" ng-transclude></ion-item>`,
         replace: 'element',
-        transclude:true
+        transclude: true
     };
-};
+}
 
 export const centralSwipeDirective = 'centralSwiper';
 export /* @ngInject */ function IonicCentralSwipe(SwiperConfigurations){

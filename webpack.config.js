@@ -1,15 +1,14 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-//const webpack = require('webpack');
+// const webpack = require('webpack');
 
 module.exports = {
-    watch: false,
     module: {
         rules: [
-            //Load js
+            // Load js
             {
                 test: /\.js?$/,
-                //exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
+                // exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['env'],
@@ -20,7 +19,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader?url=false','sass-loader']
+                    use: ['css-loader?url=false', 'sass-loader']
                 })
             },
             {
@@ -38,12 +37,12 @@ module.exports = {
     },
     entry: {
         './dist/swiper': './src/swiper.module.js',
-        './demo/demo':'./src/demo/app.module.js'
+        './demo/demo': './src/demo/app.module.js'
     },
-    //devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     devServer: {
         contentBase: './demo',
-        //hot:true
+        // hot:true
     },
     output: {
         path: __dirname,
@@ -51,12 +50,8 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin({
-            filename:  (getPath) => {
-                return getPath('[name].css').replace('css/js', 'css');
-            },
+            filename: getPath => getPath('[name].css').replace('css/js', 'css'),
             allChunks: true
         })
-        //new webpack.NamedModulesPlugin(),
-        //new webpack.HotModuleReplacementPLugin()
     ]
 };

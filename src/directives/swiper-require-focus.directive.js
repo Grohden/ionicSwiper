@@ -1,6 +1,7 @@
 import {directiveName as containerName} from './swiper-container.directive';
 
 export const directiveName = 'swiperRequireFocus';
+
 /**
  * @ngdoc directive
  * @name ionic.swiper.directive:swiperRequireFocus
@@ -18,9 +19,10 @@ export const directiveName = 'swiperRequireFocus';
 export /* @ngInject */ function SwiperRequireFocusDirective($timeout) {
     return {
         restrict: 'A',
-        priority:550,
-        require:`^^${containerName}`,
-        link: function ($scope, $element, $attr, $ctrl) {
+        priority: 550,
+        require: `^^${containerName}`,
+        // eslint-disable-next-line max-params
+        link ($scope, $element, $attr, $ctrl) {
             $timeout(() => $ctrl.slideToElement($element[0]));
         }
     };

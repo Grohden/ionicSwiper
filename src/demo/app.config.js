@@ -1,4 +1,3 @@
-
 export /* @ngInject */ function config(SwiperConfigurationsProvider) {
     'use strict';
 

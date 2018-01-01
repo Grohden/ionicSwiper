@@ -9,11 +9,12 @@
   },
   "scripts": {
     "test": "karma start",
-    "lint": "jshint ./src/",
+    "lint": "eslint ./src/",
     "docs": "gulp docs:generate",
     "build": "webpack -p --progress",
     "watch": "webpack --watch",
-    "start": "browser-sync start --files demo --server demo --index index.html",
+    "start:bs": "browser-sync start --files demo --server demo --index index.html",
+    "start": "(npm run build) && (npm run start:bs)",
     "prepack": "(npm run lint) && (npm run build)"
   },
   "pre-commit": [
@@ -28,15 +29,17 @@
   "author": "Gabriel Rohden",
   "license": "MIT",
   "devDependencies": {
-    "angular": "^1.6.6",
-    "angular-mocks": "^1.6.6",
+    "angular": "^1.6.7",
+    "angular-mocks": "^1.6.7",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-angularjs-annotate": "^0.8.2",
     "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^2.23.2",
     "css-loader": "^0.28.7",
+    "eslint": "^4.13.1",
+    "eslint-plugin-ramda": "^2.3.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.0.0",
@@ -45,13 +48,13 @@
     "jshint": "^2.9.5",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.2.0",
-    "karma-jasmine": "^1.1.0",
+    "karma-jasmine": "^1.1.1",
     "pre-commit": "^1.2.2",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.8.1"
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0"
   },
   "dependencies": {
     "ramda": "^0.25.0",
-    "swiper": "^4.0.6"
+    "swiper": "^4.0.7"
   }
 }

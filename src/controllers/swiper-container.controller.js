@@ -31,9 +31,9 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
     const _self = this;
     const swiperPromise = SwiperService.createInstanceAsync($scope.$id, $element);
 
-    const noSwipingClass = SwiperConfigurations.noSwipingClass;
+    const {noSwipingClass} = SwiperConfigurations;
 
-    //exposes scope id as container id
+    // exposes scope id as container id
     $scope.containerId = $scope.$id;
 
     /**
@@ -46,7 +46,7 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
      * @description
      * Returns an swiper instance adder
      *
-     * @return {Function} toLeft,toRight,toCenter functions to add the element
+     * @return {Object} toLeft,toRight,toCenter functions to add the element
      */
     _self.addSlide = function (slideElement) {
         return {
@@ -74,6 +74,7 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
      */
     _self.callUpdate = function () {
         swiperPromise.then(swiper => swiper.update());
+
         return _self;
     };
 
@@ -82,20 +83,17 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
      * @name ionic.swiper.controller:SwiperContainerController#slideToElement
      * @methodOf ionic.swiper.controller:SwiperContainerController
      *
-     * @param {HTMLElement} $element element to find index in slides
+     * @param {HTMLElement} targetElement element to find index in slides
      * @description
      * Calls swiper slideTo method with zero delay
      *
      * @return {spcCtrl} instance for chain calls
      */
-    _self.slideToElement = function ($element) {
+    _self.slideToElement = function (targetElement) {
         swiperPromise.then(swiper => {
-            const index = Array.prototype.findIndex.call(
-                prop('slides')(swiper),
-                eqPointer($element)
-            );
+            const index = Reflect.apply(Array.findIndex, prop('slides')(swiper), eqPointer(targetElement));
 
-            unless(equals(-1), index => {
+            unless(equals(-1), () => {
                 swiper.slideTo(index, 0);
             })(index);
         });
@@ -103,7 +101,7 @@ export /* @ngInject */ function SwiperContainerController($parse, $rootScope, $e
         return _self;
     };
 
-    const swiperObserver = $attrs.$observe(directiveName, (interpolated) => {
+    const swiperObserver = $attrs.$observe(directiveName, interpolated => {
         const enableSwiper = $parse(interpolated)();
 
         $scope.$broadcast(SWIPER_CONTAINER_STATE_UPDATE, enableSwiper);

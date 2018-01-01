@@ -15,15 +15,17 @@ export const directiveName = 'swiperSlide';
  */
 export /* @ngInject */ function SwiperSlideDirective() {
     'use strict';
+
     return {
         restrict: 'A',
-        require:`^^${containerName}`,
-        link: function ($scope, $element, $attr, $ctrl) {
+        require: `^^${containerName}`,
+        // eslint-disable-next-line max-params
+        link ($scope, $element, $attr, $ctrl) {
             const swiperItem = $attr[directiveName] || 'center';
             const slideAdder = $ctrl.addSlide($element);
 
             $scope.$on(SWIPER_CONTAINER_STATE_UPDATE, (event, enableSwiper) => {
-                if(!enableSwiper && swiperItem === 'center'){
+                if (!enableSwiper && swiperItem === 'center') {
                     $ctrl.slideToElement($element[0]);
                 }
             });

@@ -1,7 +1,8 @@
-import {SwiperConfigurationsProvider, providerName} from './swiper.configs.provider';
+import {SwiperConfigurationsProvider, providerName} from './SwiperConfigsProvider';
 
-import {serviceName as swiperService, SwiperService} from './services/swiper.service';
-import {serviceName as swiperSelectionService, SwiperSelectionService} from './services/swiper.selection.service';
+import {serviceName as swiperService, SwiperService} from './services/SwiperService';
+import {serviceName as swiperSelectionService, SwiperSelectionService} from './services/SwiperSelectionService';
+
 
 import {directiveName as containerDirective, SwiperContainerDirective} from './directives/swiper-container.directive';
 import {directiveName as itemDirective, SwiperSlideDirective} from './directives/swiper-slide.directive';
@@ -14,9 +15,6 @@ import {
 } from './directives/ionic-swiper.slides.directives';
 
 import {SwiperContainerController, controllerName as scCtrl} from './controllers/swiper-container.controller';
-
-// noinspection ES6UnusedImports
-import SwiperDefaultStyles from 'swiper/dist/css/swiper.min.css';
 
 export const moduleName = 'ionic.swiper';
 
