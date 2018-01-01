@@ -1,6 +1,4 @@
-import ifElse from 'ramda/src/ifElse';
-import map from 'ramda/src/map';
-import range from 'ramda/src/range';
+import * as R from 'ramda';
 
 export const controllerName = 'AppController';
 export /* @ngInject */ function AppController ($timeout, $scope, SwiperService, SwiperSelectionService){
@@ -8,38 +6,38 @@ export /* @ngInject */ function AppController ($timeout, $scope, SwiperService, 
 
     const _self = this;
 
-    _self.items = map(x => ({id:x}), range(1,25));
+    _self.items = R.map(x => ({id: x}), R.range(1, 25));
 
     _self.handleHold = function(selectHolder, containerId){
         console.log(containerId);
-        return ifElse(
+
+        return R.ifElse(
             SwiperService.isInMove,
+            R.F,
             () => {
-                console.log('move');
-                return false;
-            },
-            () => {
-                console.log('hold');
                 selectHolder.isSelected = SwiperSelectionService.toggleToSelection(containerId);
+
                 return selectHolder.isSelected;
             }
         )();
     };
 
     _self.randomIf = function (id) {
-        if(_self.randomIf[id]){
+        if (_self.randomIf[id]){
             return _self.randomIf[id];
-        } else {
-            const rand = Math.random() * 10 > 5;
-            return (_self.randomIf[id] = rand);
         }
+        const rand = Math.random() * 10 > 5;
+
+        _self.randomIf[id] = rand;
+
+        return rand;
     };
 
     _self.reload = function(){
         _self.items = [];
 
-        $timeout(()=>{
-            _self.items = map(x => ({id:x}), range(1,25));
+        $timeout(() => {
+            _self.items = R.map(x => ({id: x}), R.range(1, 25));
             $scope.$broadcast('scroll.refreshComplete');
         }, 200);
     };

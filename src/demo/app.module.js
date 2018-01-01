@@ -1,5 +1,5 @@
 import {AppController, controllerName}  from './app.controller.js';
-import { moduleName as SwiperModule } from '../swiper.module';
+import {moduleName as SwiperModule} from '../swiper.module';
 import {config} from './app.config';
 
 // noinspection ES6UnusedImports
