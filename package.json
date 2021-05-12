@@ -55,6 +55,6 @@
   },
   "dependencies": {
     "ramda": "^0.25.0",
-    "swiper": "^4.0.7"
+    "swiper": "^6.5.1"
   }
 }
